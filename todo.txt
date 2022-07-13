@@ -1,0 +1,14 @@
+TODO:
+	--add ship
+	add one alien
+	add a grid of aliens
+	move the ship
+	give the ship the ability to fire projectiles
+	give the aliens the ability to fire projectiles
+	collision handling (remove projectile and the actor that was hit)
+	add lives counter
+	lives handling
+	add level counter
+	implement extra levels (infinite procedural generation of aliens?)
+	add scoreboard
+	add point values to aliens
