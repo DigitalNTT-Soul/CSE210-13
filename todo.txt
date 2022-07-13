@@ -1,5 +1,6 @@
 TODO:
 	--add ship
+	sound module is using pygame and can cause bugs
 	add one alien
 	add a grid of aliens
 	move the ship
@@ -12,3 +13,4 @@ TODO:
 	implement extra levels (infinite procedural generation of aliens?)
 	add scoreboard
 	add point values to aliens
+	move the aliens
