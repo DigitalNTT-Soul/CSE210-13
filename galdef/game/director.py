@@ -1,4 +1,7 @@
+from ast import For
+from tkinter import Y
 from config import *
+from game.casting.specifics.alien import Alien
 from game.casting.basics.cast import Cast
 from game.casting.basics.body import Body
 from game.casting.basics.animation import Animation
@@ -35,6 +38,7 @@ class Director:
         self._cast = Cast() 
         self._script = Script()
         self._play_new_round = True
+        self._level = 1
                
 
     def start_game(self):
@@ -78,6 +82,8 @@ class Director:
         # self._sound_service.load_sounds("galdef/assets/sounds")
         # self._add_image_actors()
         self._add_ship()
+        # self._add_alien(Point(200,300))
+        self._add_alien_grid()
         # add aliens
         # add level, score, and lives counters
 
@@ -99,3 +105,23 @@ class Director:
         animation = Animation(SHIP_IMAGES, SHIP_RATE)
         ship = Ship(body, animation)
         self._cast.add_actor(SHIP_GROUP, ship)
+
+    def _add_alien(self, coord):
+        position = coord
+        size = Point(ALIEN_WIDTH, ALIEN_HEIGHT)
+        velocity = Point(10,10)
+        body = Body(position, size, velocity)
+        animation = Animation(ALIEN_IMAGES["b"], ALIEN_RATE, ALIEN_DELAY)
+        alien = Alien(body, animation, self._level)
+        alien.march_right()
+        self._cast.add_actor(ALIEN_GROUP, alien)
+        
+
+    def _add_alien_grid(self):
+        self._cast.clear_actors(ALIEN_GROUP)
+        for i in range(5):
+            for j in range(11):
+                x = j * ALIEN_WIDTH
+                y = i * ALIEN_HEIGHT
+                self._add_alien(Point(x, y))
+                
