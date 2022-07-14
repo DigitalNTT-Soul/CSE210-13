@@ -41,7 +41,12 @@ PROJECTILE_VELOCITY = 6
 BACKGROUND_GROUP = "Background".lower()
 BACKGROUND_WIDTH = "1040"
 BACKGROUND_HEIGHT = "680"
-BACKGROUND_IMAGE = "galdef/assets/images/dark_city.png"
+BACKGROUND_IMAGES = [
+    "galdef/assets/images/dark_city.png",
+    "galdef/assets/images/clif.jpg",
+    "galdef/assets/images/future_city.jpg",
+    "galdef/assets/images/green_hill.jpg"
+]
 
 # SHIP
 SHIP_GROUP = "ships".lower()
