@@ -13,6 +13,16 @@ WINDOW_TITLE = "Galaxy Defenders"
 #SOUNDS
 GAME_THEME = "galdef/assets/sounds/game_theme.mp3"
 
+# FONT
+FONT_FILE = "batter/assets/fonts/zorque.otf"
+FONT_SMALL = 32
+FONT_LARGE = 48
+
+# TEXT
+ALIGN_CENTER = 0
+ALIGN_LEFT = 1
+ALIGN_RIGHT = 2
+
 # STATS
 STATS_GROUP = "stats"
 DEFAULT_LIVES = 100
@@ -27,9 +37,18 @@ LEVEL_FORMAT = "LEVEL: {}"
 LIVES_FORMAT = "LIVES: {}"
 SCORE_FORMAT = "SCORE: {}"
 
+#COLORS
+WHITE = Color(255, 255, 255)
+RED = Color(255, 0, 0)
+YELLOW = Color(255, 255, 0)
+GREEN = Color(0, 255, 0)
+BLUE = Color(0, 0, 255)
+PURPLE = Color(255,0,255)
+
 # PROJECTILE
 PROJECTILE_GROUP = "PROJECTILEs".lower()
-PROJECTILE_IMAGE = "galdef/assets/images/000.png"
+PROJECTILE_BULLET_IMAGE = "galdef/assets/images/bullet.png"
+PROJECTILE_ALIEN_BULLET_IMAGE = "galdef/assets/images/alien_bullet.png"
 PROJECTILE_WIDTH = 28
 PROJECTILE_HEIGHT = 28
 PROJECTILE_VELOCITY = 10
@@ -47,14 +66,13 @@ BACKGROUND_IMAGES = [
     "galdef/assets/images/backgrounds/stellar_ring_of_death_background.png",
     "galdef/assets/images/backgrounds/stephans_quintet_background.png",
     "galdef/assets/images/backgrounds/arawn_dystopia.png"
-
 ]
 
 # SHIP
 SHIP_GROUP = "ship".lower()
 SHIP_IMAGE = "galdef/assets/images/100.png"
-SHIP_WIDTH = 100
-SHIP_HEIGHT = 100
+SHIP_WIDTH = 60
+SHIP_HEIGHT = 70
 SHIP_RATE = 6
 SHIP_VELOCITY = 7
 
@@ -85,4 +103,3 @@ ENTER = "enter"
 PAUSE = "p"
 MUTE = "m"
 
-PURPLE = Color(255,0,255)

@@ -11,6 +11,6 @@ class ControlAlienAction(Action):
         aliens = cast.get_actors(ALIEN_GROUP)            
         for alien in aliens:
             pass
-    #         # alien.march_right()
-    #         alien.move_next()
+            # alien.march_right()
+            # alien.move_next()
 

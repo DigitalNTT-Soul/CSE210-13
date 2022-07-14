@@ -4,15 +4,20 @@ from random import randint
 
 
 
+
 from game.casting.basics.cast import Cast
 from game.casting.basics.body import Body
 from game.casting.basics.image import Image
 from game.casting.basics.sound import Sound
 from game.casting.basics.animation import Animation
+from game.casting.basics.text import Text
+from game.casting.basics.label import Label
 
 from game.casting.specifics.ship import Ship
 from game.casting.specifics.alien import Alien
 from game.casting.specifics.background import Background
+from game.casting.specifics.score import Score
+from game.casting.specifics.stats import Stats
 
 
 from game.scripting.script import Script
@@ -97,6 +102,7 @@ class Director:
         self._sound_service.initialize()
         self._sound_service.load_sounds("galdef/assets/sounds")
         self._add_background()
+        self._add_score()
         self._add_ship()
         self._add_alien_grid()
         # add level, score, and lives counters
@@ -153,6 +159,34 @@ class Director:
         # alien = Alien(body, image, self._level)
         # self._cast.add_actor(ALIEN_GROUP, alien)
         return alien
+
+    def _add_score(self):
+        self._cast.clear_actors(STATS_GROUP)
+        text = Text(SCORE_FORMAT, FONT_FILE, FONT_SMALL, ALIGN_CENTER)
+        position = Point(0, MAX_Y)
+        label = Label(text, position)
+        self._cast.add_actor(STATS_GROUP, label)
+
+        # x = 0
+        # y = 0
+        # position = Point(x, y)
+        # size = Point(SHIP_WIDTH, SHIP_HEIGHT)
+        # velocity = Point(0, 0)
+        # body = Body(position, size, velocity)
+      
+        # image = Image(SHIP_IMAGE)
+
+        # score = Score()
+        
+        # self._cast.add_actor(SCORE_GROUP, score)
+
+        # def _add_score(self, cast):
+        # cast.clear_actors(SCORE_GROUP)
+        # text = Text(SCORE_FORMAT, FONT_FILE, FONT_SMALL, ALIGN_CENTER)
+        # position = Point(CENTER_X, HUD_MARGIN)
+        # label = Label(text, position)
+        # cast.add_actor(SCORE_GROUP, label)
+
         
     def _add_alien_grid(self):
         self._cast.clear_actors(ALIEN_GROUP)

@@ -14,15 +14,18 @@ class Score(Actor):
     Attributes:
         _points (int): The points earned in the game.
     """
-    def __init__(self, player_num: int = 0, player_count: int = 2):
+    def __init__(self): #(self, player_num: int = 0, player_count: int = 2):
         super().__init__()
-        self._player_num = player_num
-        self._player_count = player_count
+        # self._player_num = player_num
+        # self._player_count = player_count
         self._points = 0
         self.add_points(0)
         self.set_font_size(25)
-        x = player_num * int(config.MAX_X / player_count)
-        self.set_position(Point(x, 0))
+        self.set_color(config.BLUE)
+        # x = player_num * int(config.MAX_X / player_count)
+        # self._text = text
+        # self._position = position
+        # self.set_position(Point(300, 300))
 
     def add_points(self, points):
         """Adds the given points to the score's total points.
@@ -37,3 +40,5 @@ class Score(Actor):
         """ Resets the number of points earned to 0
         """
         self._points = 0
+
+  
