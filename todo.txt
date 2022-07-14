@@ -33,5 +33,5 @@ TODO:
 		--move the aliens straight forward
 			@Austin & Dylan
 		implement wall-collision detecting and move the aliens in their proper march
-	add more backgrounds for more levels?
-		@Ryan
+	--add more backgrounds for more levels?
+		@Ryan & Dylan

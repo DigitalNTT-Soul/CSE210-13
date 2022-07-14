@@ -3,7 +3,7 @@ from game.casting.basics.actor import Actor
 from game.shared.point import Point
 
 class Projectile(Actor):
-    def __init__(self, body, animation, launch_velocity, debug = False):
+    def __init__(self, body, animation, debug = False):
         super().__init__(debug)
         self._body = body
         self._animation = animation

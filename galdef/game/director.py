@@ -1,23 +1,28 @@
 
 from config import *
-from game.scripting.control_alien_action import ControlAlienAction
-from game.casting.specifics.alien import Alien
+from random import randint
+
+
 from game.casting.basics.cast import Cast
 from game.casting.basics.body import Body
-from game.casting.basics.animation import Animation
-from game.casting.specifics.score import Score
-from game.casting.specifics.ship import Ship
-from game.casting.specifics.background import Background
 from game.casting.basics.image import Image
+from game.casting.basics.sound import Sound
+from game.casting.basics.animation import Animation
+
+from game.casting.specifics.ship import Ship
+from game.casting.specifics.alien import Alien
+from game.casting.specifics.background import Background
+
 
 from game.scripting.script import Script
 from game.scripting.draw_actors_action import DrawActorsAction
 from game.scripting.control_ship_action import ControlShipAction
+from game.scripting.control_alien_action import ControlAlienAction
 
-from game.services.keyboard_service import KeyboardService
 from game.services.video_service import VideoService
 from game.services.sound_service import SoundService
-from game.services.audio_service import AudioService
+from game.services.keyboard_service import KeyboardService
+
 from game.shared.point import Point
 
 
@@ -40,7 +45,7 @@ class Director:
         """
         self._keyboard_service = KeyboardService()
         self._video_service = VideoService()
-        self._sound_service = AudioService()
+        self._sound_service = SoundService()
         self._cast = Cast() 
         self._script = Script()
         self._play_new_round = True
@@ -57,7 +62,7 @@ class Director:
         # while self._play_new_round:
         self._video_service.open_window()
         self._build_game()
-        self._sound_service.play_sound(WIL)
+        self._sound_service.play_sound(Sound(WIL))
 
         while self._video_service.is_window_open():
             self._execute_actions("input")
@@ -85,12 +90,10 @@ class Director:
         """
         self._video_service.load_images("galdef/assets/images")
         # self._video_service.load_fonts("galdef/assets/fonts")
-        # self._sound_service.load_sounds("galdef/assets/sounds")
+        self._sound_service.load_sounds("galdef/assets/sounds")
         self._add_background()
         self._add_ship()
-        # self._add_alien(Point(200,300))
         self._add_alien_grid()
-        # add aliens
         # add level, score, and lives counters
 
         # Come up with input, update, and output actions to script
@@ -100,17 +103,18 @@ class Director:
 
     def _dismantle_game(self):
         self._video_service.unload_images()
-        # self._sound_service.unload_sounds()
+        self._sound_service.unload_sounds()
+        # self._video_service.unload_fonts("galdef/assets/fonts")
+        self._cast.clear_all_actors()
 
     def _add_background(self):
         self._cast.clear_actors(BACKGROUND_GROUP)
-        x = 20
-        y = 80
-        position = Point(x, y)
+        position = Point()
+        velocity = Point()
         size = Point(BACKGROUND_WIDTH, BACKGROUND_HEIGHT)
-        velocity = Point(0, 0)
         body = Body(position, size, velocity)
-        image = Image(BACKGROUND_IMAGE)
+        image_num = randint(0, len(BACKGROUND_IMAGES)-1)
+        image = Image(BACKGROUND_IMAGES[image_num])
         background = Background(body, image, True)
         self._cast.add_actor(BACKGROUND_GROUP, background)
 

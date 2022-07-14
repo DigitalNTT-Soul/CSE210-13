@@ -1,14 +1,7 @@
-TARGET_MAX_X = 900
-TARGET_MAX_Y = 600
-CELL_SIZE = 15
-COLUMNS = int(TARGET_MAX_X / CELL_SIZE)
-ROWS = int(TARGET_MAX_Y / CELL_SIZE)
-MAX_X = COLUMNS * CELL_SIZE
-MAX_Y = ROWS * CELL_SIZE
+MAX_X = 1040
+MAX_Y = 680
 CENTER_X = int(MAX_X / 2)
 CENTER_Y = int(MAX_Y / 2)
-
-FONT_SIZE = CELL_SIZE
 
 FRAME_RATE = 60
 WINDOW_TITLE = "Galaxy Defenders"
@@ -43,9 +36,9 @@ BACKGROUND_WIDTH = "1040"
 BACKGROUND_HEIGHT = "680"
 BACKGROUND_IMAGES = [
     "galdef/assets/images/dark_city.png",
-    "galdef/assets/images/clif.jpg",
-    "galdef/assets/images/future_city.jpg",
-    "galdef/assets/images/green_hill.jpg"
+    "galdef/assets/images/clif.png",
+    "galdef/assets/images/future_city.png",
+    "galdef/assets/images/green_hill.png"
 ]
 
 # SHIP

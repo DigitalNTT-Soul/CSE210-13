@@ -26,8 +26,8 @@ class SoundService:
         self._sounds.clear()
     
     def play_sound(self, sound):
-        # if not isinstance(sound, Sound):
-        #     sound = Sound(sound)
+        if not isinstance(sound, Sound):
+            sound = Sound(sound)
         filepath = str(pathlib.Path(sound.get_filename()))
         volume = sound.get_volume()
         sound = self._sounds[filepath]

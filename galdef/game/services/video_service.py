@@ -80,16 +80,8 @@ class VideoService:
         Args:
             title (string): The title of the window.
         """
-        pyray.init_window(MAX_X, MAX_Y, WINDOW_TITLE)
         pyray.set_target_fps(FRAME_RATE)
-
-    def _draw_grid(self):
-        """Draws a grid on the screen."""
-        for y in range(0, MAX_Y, CELL_SIZE):
-            pyray.draw_line(0, y, MAX_X, y, pyray.GRAY)
-            
-        for x in range(0, MAX_X, CELL_SIZE):
-            pyray.draw_line(x, 0, x, MAX_Y, pyray.GRAY)
+        pyray.init_window(MAX_X, MAX_Y, WINDOW_TITLE)
     
     def _get_x_offset(self, text, font_size):
         width = pyray.measure_text(text, font_size)
@@ -121,3 +113,11 @@ class VideoService:
     def _to_raylib_color(self, color):
         r, g, b, a = color.to_tuple()
         return pyray.Color(r, g, b, a)
+
+    # def _draw_grid(self):
+    #     """Draws a grid on the screen."""
+    #     for y in range(0, MAX_Y, CELL_SIZE):
+    #         pyray.draw_line(0, y, MAX_X, y, pyray.GRAY)
+            
+    #     for x in range(0, MAX_X, CELL_SIZE):
+    #         pyray.draw_line(x, 0, x, MAX_Y, pyray.GRAY)
