@@ -4,6 +4,8 @@ from game.casting.basics.body import Body
 from game.casting.basics.animation import Animation
 from game.casting.specifics.score import Score
 from game.casting.specifics.ship import Ship
+from game.casting.specifics.background import Background
+from game.casting.basics.image import Image
 from game.scripting.script import Script
 from game.scripting.draw_actors_action import DrawActorsAction
 from game.services.keyboard_service import KeyboardService
@@ -76,7 +78,7 @@ class Director:
         self._video_service.load_images("galdef/assets/images")
         # self._video_service.load_fonts("galdef/assets/fonts")
         # self._sound_service.load_sounds("galdef/assets/sounds")
-        # self._add_image_actors()
+        self._add_background()
         self._add_ship()
         # add aliens
         # add level, score, and lives counters
@@ -87,6 +89,18 @@ class Director:
     def _dismantle_game(self):
         self._video_service.unload_images()
         # self._sound_service.unload_sounds()
+
+    def _add_background(self):
+        self._cast.clear_actors(BACKGROUND_GROUP)
+        x = 20
+        y = 80
+        position = Point(x, y)
+        size = Point(BACKGROUND_WIDTH, BACKGROUND_HEIGHT)
+        velocity = Point(0, 0)
+        body = Body(position, size, velocity)
+        image = Image(BACKGROUND_IMAGE)
+        background = Background(body, image, True)
+        self._cast.add_actor(BACKGROUND_GROUP, background)
 
     def _add_ship(self):
         self._cast.clear_actors(SHIP_GROUP)

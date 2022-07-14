@@ -30,10 +30,10 @@ class KeyboardService:
         self._keys['g'] = pyray.KEY_G
         self._keys['h'] = pyray.KEY_H
 
-        self._keys['up_arrow'] = pyray.KEY_UP
-        self._keys['left_arrow'] = pyray.KEY_LEFT
-        self._keys['down_arrow'] = pyray.KEY_DOWN
-        self._keys['right_arrow'] = pyray.KEY_RIGHT
+        self._keys['up'] = pyray.KEY_UP
+        self._keys['left'] = pyray.KEY_LEFT
+        self._keys['down'] = pyray.KEY_DOWN
+        self._keys['right'] = pyray.KEY_RIGHT
 
         #restart game
         self._keys['r'] = pyray.KEY_R

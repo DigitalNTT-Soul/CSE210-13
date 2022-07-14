@@ -1,9 +1,10 @@
 TODO:
 	--add ship
 	sound module is using pygame and can cause bugs
-	add one alien
-	add a grid of aliens
+	--add one alien
+	--add a grid of aliens
 	move the ship
+	display background
 	give the ship the ability to fire projectiles
 	give the aliens the ability to fire projectiles
 	collision handling (remove projectile and the actor that was hit)
