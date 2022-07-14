@@ -41,7 +41,7 @@ class DrawActorsAction(Action):
         # messages = cast.get_actors("messages")
         # self._video_service.draw_actors(messages, True)
 
-        self._draw_text_actors(cast, script)
+        self._draw_hud(cast)
         self._draw_other_image_actors(cast, BACKGROUND_GROUP)
         self._draw_other_image_actors(cast, SHIP_GROUP)
         self._draw_other_image_actors(cast, PROJECTILE_GROUP)
@@ -51,15 +51,20 @@ class DrawActorsAction(Action):
         
         self._video_service.flush_buffer()
 
-    def _draw_text_actors(self, cast, script):
-        pass
-        # level = cast.get_first_actor(LEVEL_GROUP)
-        # lives = cast.get_first_actor(LIVES_GROUP)
-        # score = cast.get_first_actor(SCORE_GROUP)
+    def _draw_hud(self, cast):
+        stats = cast.get_first_actor(STATS_GROUP)
+        self._draw_text_actor(cast, LEVEL_GROUP, stats.get_level())
+        self._draw_text_actor(cast, SCORE_GROUP, stats.get_score())
+        self._draw_text_actor(cast, LIVES_GROUP, stats.get_lives())
 
-        # self._video_service.draw_text_actor(level)
-        # self._video_service.draw_text_actor(lives)
-        # self._video_service.draw_text_actor(score)
+    def _draw_text_actor(self, cast, group, data):
+        label = cast.get_first_actor(group)
+        text = label.get_text()
+        format_str = text.get_value()
+        text.set_value(format_str.format(data))
+        position = label.get_position()
+        self._video_service.draw_text(text, position)
+        
 
     def _draw_other_image_actors(self, cast, group):
         actors = cast.get_actors(group)
@@ -70,7 +75,6 @@ class DrawActorsAction(Action):
         alien_grid = cast.get_first_actor(ALIEN_GROUP)
         for row in alien_grid:
             for alien in row:
-                # self._draw_other_image_actors(cast, ALIEN_GROUP)
                 self._draw_an_image_actor(alien)
 
     def _draw_an_image_actor(self, actor):

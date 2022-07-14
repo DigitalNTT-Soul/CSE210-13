@@ -67,8 +67,8 @@ class Director:
             cast (Cast): The cast of actors.
             script (Script): The script of actions.
         """
-        # while self._play_new_round:
         self._video_service.open_window()
+        # while self._play_new_round:
         self._build_game()
         self._sound_service.play_sound(GAME_THEME)
 
@@ -102,7 +102,7 @@ class Director:
         self._sound_service.initialize()
         self._sound_service.load_sounds("galdef/assets/sounds")
         self._add_background()
-        self._add_score()
+        self._add_all_stats()
         self._add_ship()
         self._add_alien_grid()
         # add level, score, and lives counters
@@ -143,7 +143,7 @@ class Director:
         # animation = Animation(SHIP_IMAGES, SHIP_RATE)
         # ship = Ship(body, animation)
         image = Image(SHIP_IMAGE)
-        ship = Ship(body, image, True)
+        ship = Ship(body, image)
         self._cast.add_actor(SHIP_GROUP, ship)
 
     def _add_alien(self, column, row):
@@ -153,40 +153,29 @@ class Director:
         size = Point(ALIEN_WIDTH, ALIEN_HEIGHT)
         velocity = Point()
         body = Body(position, size, velocity)
-        image = Image(ALIEN_IMAGES["b"])
+        # image = Image(ALIEN_IMAGES["b"])
         animation = Animation(ALIEN_IMAGES["b"], ALIEN_RATE, ALIEN_DELAY)
         alien = Alien(body, animation, self._level)
         # alien = Alien(body, image, self._level)
         # self._cast.add_actor(ALIEN_GROUP, alien)
         return alien
-
-    def _add_score(self):
-        self._cast.clear_actors(STATS_GROUP)
-        text = Text(SCORE_FORMAT, FONT_FILE, FONT_SMALL, ALIGN_CENTER)
-        position = Point(0, MAX_Y)
-        label = Label(text, position)
-        self._cast.add_actor(STATS_GROUP, label)
-
-        # x = 0
-        # y = 0
-        # position = Point(x, y)
-        # size = Point(SHIP_WIDTH, SHIP_HEIGHT)
-        # velocity = Point(0, 0)
-        # body = Body(position, size, velocity)
-      
-        # image = Image(SHIP_IMAGE)
-
-        # score = Score()
         
-        # self._cast.add_actor(SCORE_GROUP, score)
+    def _add_all_stats(self):
+        self._cast.clear_actors(STATS_GROUP)
+        self._cast.add_actor(STATS_GROUP, Stats())
+        
+        position = Point(HUD_MARGIN, HUD_MARGIN)
+        self._add_stat(LEVEL_GROUP, LEVEL_FORMAT, ALIGN_LEFT, position)
+        position = Point(CENTER_X, HUD_MARGIN)
+        self._add_stat(SCORE_GROUP, SCORE_FORMAT, ALIGN_CENTER, position)
+        position = Point(MAX_X - HUD_MARGIN, HUD_MARGIN)
+        self._add_stat(LIVES_GROUP, LIVES_FORMAT, ALIGN_RIGHT, position)
 
-        # def _add_score(self, cast):
-        # cast.clear_actors(SCORE_GROUP)
-        # text = Text(SCORE_FORMAT, FONT_FILE, FONT_SMALL, ALIGN_CENTER)
-        # position = Point(CENTER_X, HUD_MARGIN)
-        # label = Label(text, position)
-        # cast.add_actor(SCORE_GROUP, label)
-
+    def _add_stat(self, group, format, alignment, position):
+        self._cast.clear_actors(group)
+        text = Text(format, FONT_FILE, FONT_SMALL, alignment)
+        label = Label(text, position)
+        self._cast.add_actor(group, label)
         
     def _add_alien_grid(self):
         self._cast.clear_actors(ALIEN_GROUP)

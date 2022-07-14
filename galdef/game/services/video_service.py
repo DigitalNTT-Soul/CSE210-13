@@ -20,9 +20,26 @@ class VideoService:
         self._textures = {}
         self._fonts = {}
 
+    def open_window(self):
+        """Opens a new window with the provided title.
+
+        Args:
+            title (string): The title of the window.
+        """
+        pyray.set_target_fps(FRAME_RATE)
+        pyray.init_window(MAX_X, MAX_Y, WINDOW_TITLE)
+
     def close_window(self):
         """Closes the window and releases all computing resources."""
         pyray.close_window()
+
+    def is_window_open(self):
+        """Whether or not the window was closed by the user.
+
+        Returns:
+            bool: True if the window is closing; false if otherwise.
+        """
+        return not pyray.window_should_close()
 
     def clear_buffer(self):
         """Clears the buffer in preparation for the next rendering. This method should be called at
@@ -33,56 +50,11 @@ class VideoService:
         if self._debug == True:
             self._draw_grid()
     
-    def draw_text_actor(self, actor, centered=False):
-        """Draws the given actor's text on the screen.
-
-        Args:
-            actor (Actor): The actor to draw.
-        """ 
-        text = actor.get_text()
-        x = actor.get_position().get_x()
-        y = actor.get_position().get_y()
-        font_size = actor.get_font_size()
-        color = actor.get_color().to_tuple()
-
-        if centered:
-            width = pyray.measure_text(text, font_size)
-            offset = int(width / 2)
-            x -= offset
-            
-        pyray.draw_text(text, x, y, font_size, color)
-        
-    def draw_text_actors(self, actors, centered=False):
-        """Draws the text for the given list of actors on the screen.
-
-        Args:
-            actors (list): A list of actors to draw.
-        """ 
-        for actor in actors:
-            self.draw_actor(actor, centered)
-    
     def flush_buffer(self):
         """Copies the buffer contents to the screen. This method should be called at the end of
         the game's output phase.
         """ 
         pyray.end_drawing()
-
-    def is_window_open(self):
-        """Whether or not the window was closed by the user.
-
-        Returns:
-            bool: True if the window is closing; false if otherwise.
-        """
-        return not pyray.window_should_close()
-
-    def open_window(self):
-        """Opens a new window with the provided title.
-
-        Args:
-            title (string): The title of the window.
-        """
-        pyray.set_target_fps(FRAME_RATE)
-        pyray.init_window(MAX_X, MAX_Y, WINDOW_TITLE)
     
     def _get_x_offset(self, text, font_size):
         width = pyray.measure_text(text, font_size)
@@ -108,8 +80,20 @@ class VideoService:
         raylib_position = pyray.Vector2(x, y)
         scale = image.get_scale()
         rotation = image.get_rotation()
-        tint = self._to_raylib_color(Color(255,255,255))
+        tint = self._to_raylib_color(WHITE)
         pyray.draw_texture_ex(texture, raylib_position, rotation, scale, tint)
+
+    def draw_rectangle(self, rectangle, color, filled = False):
+        x = int(rectangle.get_position().get_x())
+        y = int(rectangle.get_position().get_y())
+        width = int(rectangle.get_size().get_x())
+        height = int(rectangle.get_size().get_y())
+        raylib_color = self._to_raylib_color(color)
+
+        if filled:
+            pyray.draw_rectangle(x, y, width, height, raylib_color)
+        else:
+            pyray.draw_rectangle_lines(x, y, width, height, raylib_color)
     
     def _to_raylib_color(self, color):
         r, g, b, a = color.to_tuple()
@@ -126,22 +110,25 @@ class VideoService:
             pyray.unload_font(font)
         self._fonts.clear()
 
-    def draw_rectangle(self, rectangle, color, filled = False):
-        x = int(rectangle.get_position().get_x())
-        y = int(rectangle.get_position().get_y())
-        width = int(rectangle.get_size().get_x())
-        height = int(rectangle.get_size().get_y())
-        raylib_color = self._to_raylib_color(color)
+    def draw_text(self, text, position):
+        filepath = text.get_fontfile()
+        filepath = str(pathlib.Path(filepath))
+        value = text.get_value()
+        size = text.get_size()
+        spacing = 0
+        alignment = text.get_alignment()
+        tint = self._to_raylib_color(WHITE)
+        
+        font = self._fonts[filepath]
+        text_image = pyray.image_text_ex(font, value, size, spacing, tint)
 
-        if filled:
-            pyray.draw_rectangle(x, y, width, height, raylib_color)
-        else:
-            pyray.draw_rectangle_lines(x, y, width, height, raylib_color)
+        x = position.get_x()
+        y = position.get_y()
 
-    # def _draw_grid(self):
-    #     """Draws a grid on the screen."""
-    #     for y in range(0, MAX_Y, CELL_SIZE):
-    #         pyray.draw_line(0, y, MAX_X, y, pyray.GRAY)
-            
-    #     for x in range(0, MAX_X, CELL_SIZE):
-    #         pyray.draw_line(x, 0, x, MAX_Y, pyray.GRAY)
+        if alignment == ALIGN_CENTER:
+            x = (position.get_x() - text_image.width / 2)
+        elif alignment == ALIGN_RIGHT:
+            x = (position.get_x() - text_image.width)
+
+        raylib_position = pyray.Vector2(x, y)
+        pyray.draw_text_ex(font, value, raylib_position, size, spacing, tint)

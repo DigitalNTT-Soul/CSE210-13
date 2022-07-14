@@ -14,7 +14,7 @@ WINDOW_TITLE = "Galaxy Defenders"
 GAME_THEME = "galdef/assets/sounds/game_theme.mp3"
 
 # FONT
-FONT_FILE = "batter/assets/fonts/zorque.otf"
+FONT_FILE = "galdef/assets/fonts/zorque.otf"
 FONT_SMALL = 32
 FONT_LARGE = 48
 
@@ -47,6 +47,7 @@ PURPLE = Color(255,0,255)
 
 # PROJECTILE
 PROJECTILE_GROUP = "PROJECTILEs".lower()
+PROJECTILE_BASE_IMAGE = "galdef/assets/images/000.png"
 PROJECTILE_BULLET_IMAGE = "galdef/assets/images/bullet.png"
 PROJECTILE_ALIEN_BULLET_IMAGE = "galdef/assets/images/alien_bullet.png"
 PROJECTILE_WIDTH = 28
