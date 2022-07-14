@@ -1,3 +1,4 @@
+
 from config import *
 from game.scripting.control_alien_action import ControlAlienAction
 from game.casting.specifics.alien import Alien
@@ -16,6 +17,7 @@ from game.scripting.control_ship_action import ControlShipAction
 from game.services.keyboard_service import KeyboardService
 from game.services.video_service import VideoService
 from game.services.sound_service import SoundService
+from game.services.audio_service import AudioService
 from game.shared.point import Point
 
 
@@ -38,7 +40,7 @@ class Director:
         """
         self._keyboard_service = KeyboardService()
         self._video_service = VideoService()
-        self._sound_service = SoundService()
+        self._sound_service = AudioService()
         self._cast = Cast() 
         self._script = Script()
         self._play_new_round = True
@@ -55,7 +57,7 @@ class Director:
         # while self._play_new_round:
         self._video_service.open_window()
         self._build_game()
-        self._sound_service.play_music()
+        self._sound_service.play_sound(WIL)
 
         while self._video_service.is_window_open():
             self._execute_actions("input")

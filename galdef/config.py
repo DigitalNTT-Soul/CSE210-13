@@ -13,6 +13,9 @@ FONT_SIZE = CELL_SIZE
 FRAME_RATE = 60
 WINDOW_TITLE = "Galaxy Defenders"
 
+#SOUNDS
+WIL = "galdef/assets/sounds/wilhelmscream.mp3"
+
 # STATS
 STATS_GROUP = "stats"
 DEFAULT_LIVES = 100
