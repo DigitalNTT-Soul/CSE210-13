@@ -42,10 +42,10 @@ class DrawActorsAction(Action):
         # self._video_service.draw_actors(messages, True)
 
         self._draw_text_actors(cast, script)
-        self._draw_image_actors(cast, BACKGROUND_GROUP)
-        self._draw_image_actors(cast, ALIEN_GROUP)
-        self._draw_image_actors(cast, SHIP_GROUP)
-        self._draw_image_actors(cast, PROJECTILE_GROUP)
+        self._draw_other_image_actors(cast, BACKGROUND_GROUP)
+        self._draw_other_image_actors(cast, SHIP_GROUP)
+        self._draw_other_image_actors(cast, PROJECTILE_GROUP)
+        self._draw_alien_actors(cast)
 
         
         self._video_service.flush_buffer()
@@ -60,13 +60,27 @@ class DrawActorsAction(Action):
         # self._video_service.draw_text_actor(lives)
         # self._video_service.draw_text_actor(score)
 
-    def _draw_image_actors(self, cast, group):
+    def _draw_other_image_actors(self, cast, group):
         actors = cast.get_actors(group)
         for actor in actors:
-            position = actor.get_body().get_position()
-            animation = actor.get_animation()
-            if isinstance(animation, Animation):
-                image = animation.next_image()
-            elif isinstance(animation, Image):
-                image = animation
-            self._video_service.draw_image(image, position)
+            self._draw_an_image_actor(actor)
+    
+    def _draw_alien_actors(self, cast):
+        alien_grid = cast.get_first_actor(ALIEN_GROUP)
+        for row in alien_grid:
+            for alien in row:
+                self._draw_an_image_actor(alien)
+
+    def _draw_an_image_actor(self, actor):
+        position = actor.get_body().get_position()
+        animation = actor.get_animation()
+
+        if isinstance(animation, Animation):
+            image = animation.next_image()
+        elif isinstance(animation, Image):
+            image = animation
+        self._video_service.draw_image(image, position)
+
+        if DEBUG:
+            rectangle = actor.get_body().get_rectangle()
+            self._video_service.draw_rectangle(rectangle, PURPLE)

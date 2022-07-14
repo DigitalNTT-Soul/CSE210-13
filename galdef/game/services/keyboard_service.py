@@ -14,11 +14,15 @@ class KeyboardService:
         """Constructs a new KeyboardService."""
         self._keys = {}
         
+        #movement
         self._keys['a'] = pyray.KEY_A
         self._keys['d'] = pyray.KEY_D
 
         self._keys[LEFT] = pyray.KEY_LEFT
         self._keys[RIGHT] = pyray.KEY_RIGHT
+
+        #attack
+        self._keys[SPACE] = pyray.KEY_SPACE
 
         #restart game
         self._keys['r'] = pyray.KEY_R

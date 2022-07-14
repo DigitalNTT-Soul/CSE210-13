@@ -9,6 +9,9 @@ class Alien(Actor):
         self._animation = animation
         self._level_speed = level_speed
 
+    def __str__(self):
+        return "X"
+
     #########################
     # Body Handling Section #
     #########################
@@ -16,10 +19,16 @@ class Alien(Actor):
         return self._body
 
     def move_next(self):
-        position = self._body.get_position()
         velocity = self._body.get_velocity()
-        new_position = position.add(velocity)
-        self._body.set_position(new_position)
+        position = self._body.get_position().add(velocity)
+
+        x = position.get_x()
+        if x < 0:
+            position = Point(0, position.get_y())
+        if x > MAX_X - ALIEN_WIDTH:
+            position = Point(MAX_X - ALIEN_WIDTH, position.get_y())
+
+        self._body.set_position(position)
 
     def march_left(self):
         velocity = Point(-self._level_speed, 0)

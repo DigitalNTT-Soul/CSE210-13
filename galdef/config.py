@@ -1,3 +1,7 @@
+from game.shared.color import Color
+
+DEBUG = True
+
 MAX_X = 1040
 MAX_Y = 680
 CENTER_X = int(MAX_X / 2)
@@ -8,6 +12,7 @@ WINDOW_TITLE = "Galaxy Defenders"
 
 #SOUNDS
 WIL = "galdef/assets/sounds/wilhelmscream.mp3"
+GAME_THEME = "galdef/assets/sounds/game_theme.mp3"
 
 # STATS
 STATS_GROUP = "stats"
@@ -28,7 +33,7 @@ PROJECTILE_GROUP = "PROJECTILEs".lower()
 PROJECTILE_IMAGE = "galdef/assets/images/000.png"
 PROJECTILE_WIDTH = 28
 PROJECTILE_HEIGHT = 28
-PROJECTILE_VELOCITY = 6
+PROJECTILE_VELOCITY = 10
 
 # BACKGROUND
 BACKGROUND_GROUP = "Background".lower()
@@ -58,8 +63,8 @@ ALIEN_IMAGES = {
     "p": [f"galdef/assets/images/{i:03}.png" for i in range(30,39)],
     "y": [f"galdef/assets/images/{i:03}.png" for i in range(40,49)]
 }
-ALIEN_WIDTH = 80
-ALIEN_HEIGHT = 28
+ALIEN_WIDTH = 50
+ALIEN_HEIGHT = 40
 ALIEN_DELAY = 0.5
 ALIEN_RATE = 4
 
@@ -76,3 +81,5 @@ SPACE = "space"
 ENTER = "enter"
 PAUSE = "p"
 MUTE = "m"
+
+PURPLE = Color(255,0,255)

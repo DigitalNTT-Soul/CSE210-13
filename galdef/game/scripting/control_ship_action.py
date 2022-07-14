@@ -15,4 +15,3 @@ class ControlShipAction(Action):
             ship.swing_right()  
         else: 
             ship.stop_moving()
-        ship.move_next()

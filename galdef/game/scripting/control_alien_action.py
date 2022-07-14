@@ -8,7 +8,8 @@ class ControlAlienAction(Action):
         pass
         
     def execute(self, cast, script):
-        aliens = cast.get_actors(ALIEN_GROUP)
+        aliens = cast.get_actors(ALIEN_GROUP)            
         for alien in aliens:
-            alien.march_forward()
+            alien.march_right()
             alien.move_next()
+

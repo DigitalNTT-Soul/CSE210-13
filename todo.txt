@@ -1,7 +1,7 @@
 TODO:
 	--add ship
 		@Dylan
-	migrate sound_service to use pyray rather than pygame
+	--migrate sound_service to use pyray rather than pygame
 		@Dylan
 	--add one alien
 		@Austin
@@ -11,7 +11,9 @@ TODO:
 		@Larry & Dylan
 	--display background
 		@Dylan
-	give the ship the ability to fire projectiles
+	--give the ship the ability to fire projectiles
+		@Dylan
+		cap the fire rate so we can't just have a beam of projectiles by holding spacebar
 	give the aliens the ability to fire projectiles
 	collision handling
 		projectile on actor:
@@ -35,3 +37,4 @@ TODO:
 		implement wall-collision detecting and move the aliens in their proper march
 	--add more backgrounds for more levels?
 		@Ryan & Dylan
+	make music loop with pyray
