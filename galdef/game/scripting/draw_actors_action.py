@@ -43,12 +43,11 @@ class DrawActorsAction(Action):
 
        
         self._draw_other_image_actors(cast, BACKGROUND_GROUP)
-        self._draw_hud(cast)
         self._draw_other_image_actors(cast, SHIP_GROUP)
         self._draw_other_image_actors(cast, PROJECTILE_GROUP)
         # self._draw_other_image_actors(cast, ALIEN_GROUP)
         self._draw_alien_actors(cast)
-
+        self._draw_hud(cast)
         
         self._video_service.flush_buffer()
 
