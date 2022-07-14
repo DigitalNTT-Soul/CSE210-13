@@ -30,8 +30,8 @@ class Alien(Actor):
         self._body.set_velocity(velocity)
 
     def march_forward(self):
-        velocity = Point(0, self._level_speed)
-        self._body.set_vlocity(velocity)
+        velocity = Point(-1, self._level_speed)
+        self._body.set_velocity(velocity)
 
     ##############################
     # Animation Handling Section #
