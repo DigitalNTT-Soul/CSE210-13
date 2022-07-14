@@ -71,9 +71,9 @@ BACKGROUND_IMAGES = [
 
 # SHIP
 SHIP_GROUP = "ship".lower()
-SHIP_IMAGE = "galdef/assets/images/100.png"
+SHIP_IMAGE = "galdef/assets/images/spaceship.png"
 SHIP_WIDTH = 60
-SHIP_HEIGHT = 70
+SHIP_HEIGHT = 60
 SHIP_RATE = 6
 SHIP_VELOCITY = 7
 

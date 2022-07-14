@@ -41,8 +41,9 @@ class DrawActorsAction(Action):
         # messages = cast.get_actors("messages")
         # self._video_service.draw_actors(messages, True)
 
-        self._draw_hud(cast)
+       
         self._draw_other_image_actors(cast, BACKGROUND_GROUP)
+        self._draw_hud(cast)
         self._draw_other_image_actors(cast, SHIP_GROUP)
         self._draw_other_image_actors(cast, PROJECTILE_GROUP)
         # self._draw_other_image_actors(cast, ALIEN_GROUP)
