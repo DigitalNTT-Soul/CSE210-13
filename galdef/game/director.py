@@ -127,18 +127,17 @@ class Director:
     def _add_alien(self, coord):
         position = coord
         size = Point(ALIEN_WIDTH, ALIEN_HEIGHT)
-        velocity = Point(10,10)
+        velocity = Point()
         body = Body(position, size, velocity)
         animation = Animation(ALIEN_IMAGES["b"], ALIEN_RATE, ALIEN_DELAY)
         alien = Alien(body, animation, self._level)
-        alien
         self._cast.add_actor(ALIEN_GROUP, alien)
         
 
     def _add_alien_grid(self):
         self._cast.clear_actors(ALIEN_GROUP)
         for i in range(5):
-            for j in range(11):
+            for j in range(10):
                 x = j * ALIEN_WIDTH
                 y = i * ALIEN_HEIGHT
                 self._add_alien(Point(x, y))
