@@ -1,6 +1,5 @@
-from ast import For
-from tkinter import Y
 from config import *
+from game.scripting.control_alien_action import ControlAlienAction
 from game.casting.specifics.alien import Alien
 from game.casting.basics.cast import Cast
 from game.casting.basics.body import Body
@@ -95,6 +94,7 @@ class Director:
         # Come up with input, update, and output actions to script
         self._script.add_action("update", ControlShipAction(self._keyboard_service))
         self._script.add_action("output", DrawActorsAction(self._video_service))
+        self._script.add_action("update", ControlAlienAction())
 
     def _dismantle_game(self):
         self._video_service.unload_images()
@@ -131,7 +131,7 @@ class Director:
         body = Body(position, size, velocity)
         animation = Animation(ALIEN_IMAGES["b"], ALIEN_RATE, ALIEN_DELAY)
         alien = Alien(body, animation, self._level)
-        alien.march_right()
+        alien
         self._cast.add_actor(ALIEN_GROUP, alien)
         
 
