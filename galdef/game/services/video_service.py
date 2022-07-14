@@ -18,6 +18,7 @@ class VideoService:
         """
         self._debug = debug
         self._textures = {}
+        self._fonts = {}
 
     def close_window(self):
         """Closes the window and releases all computing resources."""
@@ -113,6 +114,17 @@ class VideoService:
     def _to_raylib_color(self, color):
         r, g, b, a = color.to_tuple()
         return pyray.Color(r, g, b, a)
+
+    def load_fonts(self, directory):
+        filepaths = OSTool.get_filepaths(directory, [".otf", ".ttf"])
+        for filepath in filepaths:
+            if filepath not in self._fonts.keys():
+                self._fonts[filepath] = pyray.load_font(filepath)
+
+    def unload_fonts(self):
+        for font in self._fonts.values():
+            pyray.unload_font(font)
+        self._fonts.clear()
 
     # def _draw_grid(self):
     #     """Draws a grid on the screen."""

@@ -62,7 +62,7 @@ class Director:
         # while self._play_new_round:
         self._video_service.open_window()
         self._build_game()
-        self._sound_service.play_sound(Sound(WIL))
+        self._sound_service.play_sound(WIL)
 
         while self._video_service.is_window_open():
             self._execute_actions("input")
@@ -89,7 +89,9 @@ class Director:
         """ Builds the game
         """
         self._video_service.load_images("galdef/assets/images")
-        # self._video_service.load_fonts("galdef/assets/fonts")
+        self._video_service.load_images("galdef/assets/images/backgrounds")
+        self._video_service.load_fonts("galdef/assets/fonts")
+        self._sound_service.initialize()
         self._sound_service.load_sounds("galdef/assets/sounds")
         self._add_background()
         self._add_ship()
@@ -102,10 +104,11 @@ class Director:
         self._script.add_action("update", ControlAlienAction())
 
     def _dismantle_game(self):
+        self._cast.clear_all_actors()
         self._video_service.unload_images()
         self._sound_service.unload_sounds()
-        # self._video_service.unload_fonts("galdef/assets/fonts")
-        self._cast.clear_all_actors()
+        self._sound_service.release()
+        self._video_service.unload_fonts()
 
     def _add_background(self):
         self._cast.clear_actors(BACKGROUND_GROUP)
