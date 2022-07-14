@@ -1,13 +1,21 @@
 TODO:
 	--add ship
-	sound module is using pygame and can cause bugs
+	migrate sound_service to use pyray rather than pygame
 	--add one alien
 	--add a grid of aliens
-	move the ship
-	display background
+	--move the ship
+	--display background
 	give the ship the ability to fire projectiles
 	give the aliens the ability to fire projectiles
-	collision handling (remove projectile and the actor that was hit)
+	collision handling
+		projectile on actor:
+			delete both projectile and actor
+		projectile on projectile:
+			delete both projectiles
+		--player on wall
+			--just stop
+		alien on wall
+			march_forward, then march to opposite side
 	add lives counter
 	lives handling
 	add level counter
@@ -15,3 +23,5 @@ TODO:
 	add scoreboard
 	add point values to aliens
 	move the aliens
+		--move the aliens straight forward
+		implement wall-collision detecting and move the aliens in their proper march

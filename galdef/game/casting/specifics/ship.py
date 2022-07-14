@@ -15,9 +15,8 @@ class Ship(Actor):
         return self._body
     
     def move_next(self):
-        position = self._body.get_position()
         velocity = self._body.get_velocity()
-        new_position = position.add(velocity)
+        position = self._body.get_position().add(velocity)
         
         x = position.get_x()
         if x < 0:
@@ -25,7 +24,7 @@ class Ship(Actor):
         elif x > (MAX_X - SHIP_WIDTH):
             position = Point(MAX_X - SHIP_WIDTH, position.get_y())
 
-        self._body.set_position(new_position)
+        self._body.set_position(position)
 
     def swing_left(self):
         velocity = Point(-SHIP_VELOCITY, 0)
