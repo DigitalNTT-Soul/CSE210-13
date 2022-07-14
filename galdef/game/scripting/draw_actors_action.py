@@ -45,6 +45,7 @@ class DrawActorsAction(Action):
         self._draw_other_image_actors(cast, BACKGROUND_GROUP)
         self._draw_other_image_actors(cast, SHIP_GROUP)
         self._draw_other_image_actors(cast, PROJECTILE_GROUP)
+        # self._draw_other_image_actors(cast, ALIEN_GROUP)
         self._draw_alien_actors(cast)
 
         
@@ -69,6 +70,7 @@ class DrawActorsAction(Action):
         alien_grid = cast.get_first_actor(ALIEN_GROUP)
         for row in alien_grid:
             for alien in row:
+                # self._draw_other_image_actors(cast, ALIEN_GROUP)
                 self._draw_an_image_actor(alien)
 
     def _draw_an_image_actor(self, actor):

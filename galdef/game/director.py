@@ -134,8 +134,10 @@ class Director:
         size = Point(SHIP_WIDTH, SHIP_HEIGHT)
         velocity = Point(0, 0)
         body = Body(position, size, velocity)
-        animation = Animation(SHIP_IMAGES, SHIP_RATE)
-        ship = Ship(body, animation)
+        # animation = Animation(SHIP_IMAGES, SHIP_RATE)
+        # ship = Ship(body, animation)
+        image = Image(SHIP_IMAGE)
+        ship = Ship(body, image, True)
         self._cast.add_actor(SHIP_GROUP, ship)
 
     def _add_alien(self, column, row):
@@ -145,8 +147,10 @@ class Director:
         size = Point(ALIEN_WIDTH, ALIEN_HEIGHT)
         velocity = Point()
         body = Body(position, size, velocity)
+        image = Image(ALIEN_IMAGES["b"])
         animation = Animation(ALIEN_IMAGES["b"], ALIEN_RATE, ALIEN_DELAY)
         alien = Alien(body, animation, self._level)
+        # alien = Alien(body, image, self._level)
         # self._cast.add_actor(ALIEN_GROUP, alien)
         return alien
         

@@ -11,7 +11,6 @@ FRAME_RATE = 60
 WINDOW_TITLE = "Galaxy Defenders"
 
 #SOUNDS
-WIL = "galdef/assets/sounds/wilhelmscream.mp3"
 GAME_THEME = "galdef/assets/sounds/game_theme.mp3"
 
 # STATS
@@ -44,12 +43,16 @@ BACKGROUND_IMAGES = [
     "galdef/assets/images/backgrounds/clif_background.png",
     "galdef/assets/images/backgrounds/future_city_background.png",
     "galdef/assets/images/backgrounds/green_hill_background.png",
-    'galdef/assets/images/backgrounds/cosmic_cliffs_background.png'
+    'galdef/assets/images/backgrounds/cosmic_cliffs_background.png',
+    "galdef/assets/images/backgrounds/stellar_ring_of_death_background.png",
+    "galdef/assets/images/backgrounds/stephans_quintet_background.png",
+    "galdef/assets/images/backgrounds/arawn_dystopia.png"
+
 ]
 
 # SHIP
-SHIP_GROUP = "ships".lower()
-SHIP_IMAGES = [f"galdef/assets/images/{n:03}.png" for n in range(100, 103)]
+SHIP_GROUP = "ship".lower()
+SHIP_IMAGE = "galdef/assets/images/100.png"
 SHIP_WIDTH = 100
 SHIP_HEIGHT = 100
 SHIP_RATE = 6
