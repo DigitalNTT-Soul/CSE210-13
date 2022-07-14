@@ -10,7 +10,7 @@ CENTER_Y = int(MAX_Y / 2)
 
 FONT_SIZE = CELL_SIZE
 
-FRAME_RATE = 7
+FRAME_RATE = 60
 WINDOW_TITLE = "Galaxy Defenders"
 
 # STATS

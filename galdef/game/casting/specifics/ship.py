@@ -18,6 +18,13 @@ class Ship(Actor):
         position = self._body.get_position()
         velocity = self._body.get_velocity()
         new_position = position.add(velocity)
+        
+        x = position.get_x()
+        if x < 0:
+            position = Point(0, position.get_y())
+        elif x > (MAX_X - SHIP_WIDTH):
+            position = Point(MAX_X - SHIP_WIDTH, position.get_y())
+
         self._body.set_position(new_position)
 
     def swing_left(self):

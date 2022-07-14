@@ -6,8 +6,11 @@ from game.casting.specifics.score import Score
 from game.casting.specifics.ship import Ship
 from game.casting.specifics.background import Background
 from game.casting.basics.image import Image
+
 from game.scripting.script import Script
 from game.scripting.draw_actors_action import DrawActorsAction
+from game.scripting.control_ship_action import ControlShipAction
+
 from game.services.keyboard_service import KeyboardService
 from game.services.video_service import VideoService
 from game.services.sound_service import SoundService
@@ -84,6 +87,7 @@ class Director:
         # add level, score, and lives counters
 
         # Come up with input, update, and output actions to script
+        self._script.add_action("update", ControlShipAction(self._keyboard_service))
         self._script.add_action("output", DrawActorsAction(self._video_service))
 
     def _dismantle_game(self):
