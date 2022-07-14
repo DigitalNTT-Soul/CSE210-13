@@ -1,4 +1,6 @@
 from config import *
+from game.casting.basics.animation import Animation
+from game.casting.basics.image import Image
 from game.scripting.action import Action
 
 class DrawActorsAction(Action):
@@ -40,7 +42,11 @@ class DrawActorsAction(Action):
         # self._video_service.draw_actors(messages, True)
 
         self._draw_text_actors(cast, script)
-        self._draw_image_actors(cast, script)
+        self._draw_image_actors(cast, BACKGROUND_GROUP)
+        self._draw_image_actors(cast, ALIEN_GROUP)
+        self._draw_image_actors(cast, SHIP_GROUP)
+        self._draw_image_actors(cast, PROJECTILE_GROUP)
+
         
         self._video_service.flush_buffer()
 
@@ -54,21 +60,13 @@ class DrawActorsAction(Action):
         # self._video_service.draw_text_actor(lives)
         # self._video_service.draw_text_actor(score)
 
-    def _draw_image_actors(self, cast, script):
-        ships = cast.get_actors(SHIP_GROUP)
-        for ship in ships: # should only be one
-            position = ship.get_body().get_position()
-            image = ship.get_animation().next_image()
-            self._video_service.draw_image(image, position)
-
-        aliens = cast.get_actors(ALIEN_GROUP)
-        for alien in aliens:
-            position = alien.get_body().get_position()
-            image = alien.get_animation().next_image()
-            self._video_service.draw_image(image, position)
-
-        projectiles = cast.get_actors(PROJECTILE_GROUP)
-        for projectile in projectiles:
-            position = projectile.get_body().get_position()
-            image = projectile.get_animation().next_image()
+    def _draw_image_actors(self, cast, group):
+        actors = cast.get_actors(group)
+        for actor in actors:
+            position = actor.get_body().get_position()
+            animation = actor.get_animation()
+            if isinstance(animation, Animation):
+                image = animation.next_image()
+            elif isinstance(animation, Image):
+                image = animation
             self._video_service.draw_image(image, position)

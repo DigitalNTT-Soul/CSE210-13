@@ -23,17 +23,6 @@ class Score(Actor):
         self.set_font_size(25)
         x = player_num * int(config.MAX_X / player_count)
         self.set_position(Point(x, 0))
-        match player_num:
-            case 0:
-                self.set_color(config.GREEN)
-            case 1:
-                self.set_color(config.RED)
-            case 2:
-                self.set_color(config.BLUE)
-            case 3:
-                self.set_color(config.YELLOW)
-        
-                
 
     def add_points(self, points):
         """Adds the given points to the score's total points.

@@ -13,10 +13,6 @@ FONT_SIZE = CELL_SIZE
 FRAME_RATE = 7
 WINDOW_TITLE = "Galaxy Defenders"
 
-# -------------------------------------------------------------------------------------------------- 
-# CASTING CONSTANTS
-# -------------------------------------------------------------------------------------------------- 
-
 # STATS
 STATS_GROUP = "stats"
 DEFAULT_LIVES = 100
@@ -70,3 +66,11 @@ DIALOG_GROUP = "dialogs"
 ENTER_TO_START = "PRESS ENTER TO START"
 PREP_TO_LAUNCH = "PREPARING TO LAUNCH"
 WAS_GOOD_GAME = "GAME OVER"
+
+# KEYS
+LEFT = "left"
+RIGHT = "right"
+SPACE = "space"
+ENTER = "enter"
+PAUSE = "p"
+MUTE = "m"
