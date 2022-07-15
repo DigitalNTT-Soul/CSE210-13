@@ -1,5 +1,6 @@
 from config import *
 
+
 from game.casting.basics.body import Body
 from game.casting.basics.image import Image
 from game.casting.specifics.projectile import Projectile
@@ -12,10 +13,12 @@ class PlayerFireProjectileAction(Action):
     def __init__(self, keyboard_service, sound_service):
         self._keyboard_service = keyboard_service
         self._sound_service = sound_service
+        self._already_shot = False
 
     def execute(self, cast, script):
-        if self._keyboard_service.is_key_down(SPACE):
 
+        if self._keyboard_service.is_key_pressed(SPACE):
+    
             self._sound_service.play_sound(BULLET_SOUND)
 
             ship = cast.get_first_actor(SHIP_GROUP)
@@ -24,7 +27,7 @@ class PlayerFireProjectileAction(Action):
             ship_y = ship_position.get_y()
             projectile_x = ship_x + (SHIP_WIDTH - PROJECTILE_WIDTH) / 2
             projectile_y = ship_y - PROJECTILE_HEIGHT
-
+            
             projectile_position = Point(projectile_x, projectile_y)
             size = Point(PROJECTILE_WIDTH, PROJECTILE_HEIGHT)
             velocity = Point(0, -PROJECTILE_VELOCITY)
@@ -33,5 +36,5 @@ class PlayerFireProjectileAction(Action):
             animation = Image(PROJECTILE_BULLET_IMAGE)
 
             projectile = Projectile(body, animation, ship)
-
+            
             cast.add_actor(PROJECTILE_GROUP, projectile)

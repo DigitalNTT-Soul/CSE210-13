@@ -35,7 +35,7 @@ class KeyboardService:
         """Checks if the given key is currently up.
         
         Args:
-            key (string): The given key (w, a, s, d or i, j, k, l)
+            key (string): The given key 
         """
         pyray_key = self._keys[key.lower()]
         return pyray.is_key_up(pyray_key)
@@ -44,7 +44,16 @@ class KeyboardService:
         """Checks if the given key is currently down.
         
         Args:
-            key (string): The given key (w, a, s, d or i, j, k, l)
+            key (string): The given key 
         """
         pyray_key = self._keys[key.lower()]
         return pyray.is_key_down(pyray_key)
+
+    def is_key_pressed(self, key):
+        """Checks if the given key has been pressed once.
+        
+        Args:
+            key (string): The given key 
+        """
+        pyray_key = self._keys[key.lower()]
+        return pyray.is_key_pressed(pyray_key)
