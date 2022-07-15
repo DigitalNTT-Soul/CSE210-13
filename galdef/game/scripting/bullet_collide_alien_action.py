@@ -24,7 +24,7 @@ class BulletCollideAlienAction(Action):
                 sound_num = randint(0, len(EXPLOSION_SOUNDS)-1)
                 sound = EXPLOSION_SOUNDS[sound_num]
                 self._sound_service.play_sound(sound)
-                points = bullet.get_points()
+                points = alien.get_points()
                 stats.add_points(points)
                 cast.remove_actor(ALIEN_GROUP, alien)
                 cast.remove_actor(PROJECTILE_GROUP, bullet)
