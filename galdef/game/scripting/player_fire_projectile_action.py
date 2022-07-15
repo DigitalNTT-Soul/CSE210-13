@@ -9,11 +9,15 @@ from game.shared.point import Point
 
 class PlayerFireProjectileAction(Action):
 
-    def __init__(self, keyboard_service):
+    def __init__(self, keyboard_service, sound_service):
         self._keyboard_service = keyboard_service
+        self._sound_service = sound_service
 
     def execute(self, cast, script):
         if self._keyboard_service.is_key_down(SPACE):
+
+            self._sound_service.play_sound(BULLET_SOUND)
+
             ship = cast.get_first_actor(SHIP_GROUP)
             ship_position = ship.get_body().get_position()
             ship_x = ship_position.get_x()

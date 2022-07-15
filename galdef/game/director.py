@@ -108,7 +108,7 @@ class Director:
 
         # Come up with input, update, and output actions to script
         self._script.add_action("input", ControlShipAction(self._keyboard_service))
-        self._script.add_action("input", PlayerFireProjectileAction(self._keyboard_service))
+        self._script.add_action("input", PlayerFireProjectileAction(self._keyboard_service, self._sound_service))
         self._script.add_action("update", ControlAlienAction())
         self._script.add_action("update", MoveActorsAction())
         self._script.add_action("output", DrawActorsAction(self._video_service))
