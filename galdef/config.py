@@ -70,10 +70,10 @@ BACKGROUND_IMAGES = [
     'galdef/assets/images/backgrounds/cosmic_cliffs_background.png',
     "galdef/assets/images/backgrounds/stellar_ring_of_death_background.png",
     "galdef/assets/images/backgrounds/stephans_quintet_background.png",
-    "galdef/assets/images/backgrounds/arawn_dystopia.png"
-    "galdef/assets/images/backgrounds/nebula_background.png"
-    "galdef/assets/images/backgrounds/snippet_of_creation_background.png"
-    "galdef/assets/images/backgrounds/pillars_of_creation_background.png"
+    "galdef/assets/images/backgrounds/arawn_dystopia.png",
+    "galdef/assets/images/backgrounds/nebula_background.png",
+    "galdef/assets/images/backgrounds/snippet_of_creation_background.png",
+    "galdef/assets/images/backgrounds/pillars_of_creation_background.png",
 ]
 
 # SHIP
