@@ -139,8 +139,6 @@ class Director:
         size = Point(SHIP_WIDTH, SHIP_HEIGHT)
         velocity = Point(0, 0)
         body = Body(position, size, velocity)
-        # animation = Animation(SHIP_IMAGES, SHIP_RATE)
-        # ship = Ship(body, animation)
         image = Image(SHIP_IMAGE)
         ship = Ship(body, image)
         self._cast.add_actor(SHIP_GROUP, ship)
