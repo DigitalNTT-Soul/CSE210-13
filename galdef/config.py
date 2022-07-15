@@ -47,7 +47,7 @@ PURPLE = Color(255,0,255)
 
 # PROJECTILE
 PROJECTILE_GROUP = "PROJECTILEs".lower()
-PROJECTILE_BASE_IMAGE = "galdef/assets/images/000.png"
+
 PROJECTILE_BULLET_IMAGE = "galdef/assets/images/bullet.png"
 PROJECTILE_ALIEN_BULLET_IMAGE = "galdef/assets/images/alien_bullet.png"
 PROJECTILE_WIDTH = 11

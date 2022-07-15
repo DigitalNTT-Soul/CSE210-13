@@ -16,7 +16,6 @@ from game.casting.basics.label import Label
 from game.casting.specifics.ship import Ship
 from game.casting.specifics.alien import Alien
 from game.casting.specifics.background import Background
-from game.casting.specifics.score import Score
 from game.casting.specifics.stats import Stats
 
 
