@@ -2,9 +2,6 @@
 from config import *
 from random import randint
 
-
-
-
 from game.casting.basics.cast import Cast
 from game.casting.basics.body import Body
 from game.casting.basics.image import Image
@@ -18,22 +15,20 @@ from game.casting.specifics.alien import Alien
 from game.casting.specifics.background import Background
 from game.casting.specifics.stats import Stats
 
-
 from game.scripting.script import Script
 from game.scripting.move_actors_action import MoveActorsAction
 from game.scripting.draw_actors_action import DrawActorsAction
 from game.scripting.control_ship_action import ControlShipAction
 from game.scripting.control_alien_action import ControlAlienAction
 from game.scripting.player_fire_projectile_action import PlayerFireProjectileAction
+from game.scripting.bullet_collide_alien_action import BulletCollideAlienAction
 
 from game.services.video_service import VideoService
 from game.services.sound_service import SoundService
 from game.services.keyboard_service import KeyboardService
+from game.services.physics_service import PhysicsService
 
 from game.shared.point import Point
-
-
-
 
 class Director:
     """A person who directs the game. 
@@ -53,6 +48,7 @@ class Director:
         self._keyboard_service = KeyboardService()
         self._video_service = VideoService()
         self._sound_service = SoundService()
+        self._physics_service = PhysicsService()
         self._cast = Cast() 
         self._script = Script()
         self._play_new_round = True
@@ -110,6 +106,7 @@ class Director:
         self._script.add_action("input", ControlShipAction(self._keyboard_service))
         self._script.add_action("input", PlayerFireProjectileAction(self._keyboard_service, self._sound_service))
         self._script.add_action("update", ControlAlienAction())
+        self._script.add_action("update", BulletCollideAlienAction(self._physics_service, self._sound_service))
         self._script.add_action("update", MoveActorsAction())
         self._script.add_action("output", DrawActorsAction(self._video_service))
 

@@ -13,18 +13,18 @@ class BulletCollideAlienAction(Action):
         bullet = cast.get_first_actor(PROJECTILE_GROUP)
         aliens = cast.get_actors(ALIEN_GROUP)
         stats = cast.get_first_actor(STATS_GROUP)
-        
-        for alien in aliens:
-            bullet_body = bullet.get_body()
-            alien_body = alien.get_body()
+    
+        pass
+        # for alien in aliens:
+        #     bullet_body = bullet.get_body()
+        #     alien_body = aliens.get_body()
 
-            if self._physics_service.has_collided(bullet_body, alien_body):
-                # collision call here....
-
-                sound_num = randint(0, len(EXPLOSION_SOUNDS)-1)
-                sound = EXPLOSION_SOUNDS[sound_num]
-                self._sound_service.play_sound(sound)
-                points = alien.get_points()
-                stats.add_points(points)
-                cast.remove_actor(ALIEN_GROUP, alien)
-                cast.remove_actor(PROJECTILE_GROUP, bullet)
+        #     if self._physics_service.has_collided(bullet_body, alien_body):
+               
+        #         sound_num = randint(0, len(EXPLOSION_SOUNDS)-1)
+        #         sound = EXPLOSION_SOUNDS[sound_num]
+        #         self._sound_service.play_sound(sound)
+        #         points = alien.get_points()
+        #         stats.add_points(points)
+        #         cast.remove_actor(ALIEN_GROUP, alien)
+        #         cast.remove_actor(PROJECTILE_GROUP, bullet)

@@ -32,3 +32,19 @@ class SoundService:
         volume = sound.get_volume()
         sound = self._sounds[filepath]
         pyray.play_sound(sound)
+
+    def is_sound_playing(self, sound):
+        """Check if a sound is currently playing
+        """
+        if not isinstance(sound, Sound):
+            sound = Sound(sound)
+        filepath = str(pathlib.Path(sound.get_filename()))
+        sound = self._sounds[filepath]
+        pyray.is_sound_playing(sound)
+
+    # def play_sound_looped(self, sound):
+    #     if not isinstance(sound, Sound):
+    #         sound = Sound(sound, .5, True)
+    #     filepath = str(pathlib.Path(sound.get_filename()))
+    #     sound = self._sounds[filepath]
+    #     pyray.play_sound(sound)

@@ -10,5 +10,8 @@ class Sound:
     def get_volume(self):
         return self._volume
 
+    def set_volume(self, volume_num):
+        self._volume = volume_num
+
     def is_repeated(self):
         return self._repeated

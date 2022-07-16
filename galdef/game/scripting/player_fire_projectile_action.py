@@ -13,7 +13,7 @@ class PlayerFireProjectileAction(Action):
     def __init__(self, keyboard_service, sound_service):
         self._keyboard_service = keyboard_service
         self._sound_service = sound_service
-        self._already_shot = False
+        # self._already_shot = False
 
     def execute(self, cast, script):
 
