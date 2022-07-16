@@ -11,6 +11,7 @@ class Stats(Actor):
         self._level = 1
         self._lives = DEFAULT_LIVES
         self._score = 0
+        self._kills = 0
 
     def add_life(self):
         """Adds one life."""
@@ -24,6 +25,19 @@ class Stats(Actor):
             points: A number representing the points to add.
         """
         self._score += points
+
+    def add_kill(self):
+        """Adds one kill to kills.
+        """
+        self._kills += 1
+
+    def get_kills(self):
+        """Gets the level.
+
+        Returns:
+            A number representing the number of kills.
+        """
+        return self._kills
 
     def get_level(self):
         """Gets the level.

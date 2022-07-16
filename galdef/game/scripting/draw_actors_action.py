@@ -55,6 +55,7 @@ class DrawActorsAction(Action):
         self._draw_text_actor(cast, LEVEL_GROUP, stats.get_level())
         self._draw_text_actor(cast, SCORE_GROUP, stats.get_score())
         self._draw_text_actor(cast, LIVES_GROUP, stats.get_lives())
+        self._draw_text_actor(cast, KILLS_GROUP, stats.get_kills())
 
     def _draw_text_actor(self, cast, group, data):
         label = cast.get_first_actor(group)

@@ -163,7 +163,9 @@ class Director:
         
         position = Point(HUD_MARGIN, HUD_MARGIN)
         self._add_stat(LEVEL_GROUP, LEVEL_FORMAT, ALIGN_LEFT, position)
-        position = Point(CENTER_X, HUD_MARGIN)
+        position = Point(2 * (MAX_X/6), HUD_MARGIN)
+        self._add_stat(KILLS_GROUP, KILLS_FORMAT, ALIGN_CENTER, position)
+        position = Point(4 * (MAX_X/6), HUD_MARGIN)
         self._add_stat(SCORE_GROUP, SCORE_FORMAT, ALIGN_CENTER, position)
         position = Point(MAX_X - HUD_MARGIN, HUD_MARGIN)
         self._add_stat(LIVES_GROUP, LIVES_FORMAT, ALIGN_RIGHT, position)
