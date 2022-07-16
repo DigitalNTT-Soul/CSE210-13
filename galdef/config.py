@@ -18,7 +18,7 @@ EXPLOSION_SOUNDS = [
     "galdef/assets/sounds/explosion2.wav"]
 
 # FONT
-FONT_FILE = "galdef/assets/fonts/zorque.otf"
+FONT_FILE = "galdef/assets/fonts/FastHand.ttf" # "galdef/assets/fonts/zorque.otf"
 FONT_SMALL = 32
 FONT_LARGE = 48
 
