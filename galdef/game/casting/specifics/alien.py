@@ -7,7 +7,8 @@ class Alien(Actor):
         super().__init__(debug)
         self._body = body
         self._animation = animation
-        self._level_speed = level_speed
+        self._level_speed = min(level_speed, 10)
+        self._points = 1
 
     def __str__(self):
         return "X"
@@ -39,8 +40,11 @@ class Alien(Actor):
         self._body.set_velocity(velocity)
 
     def march_forward(self):
-        velocity = Point(0, self._level_speed)
+        velocity = Point(0, ALIEN_HEIGHT)
         self._body.set_velocity(velocity)
+
+    def get_points(self):
+        return self._points
 
     ##############################
     # Animation Handling Section #

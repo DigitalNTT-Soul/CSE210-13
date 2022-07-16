@@ -13,10 +13,11 @@ TODO:
 		@Dylan
 	--give the ship the ability to fire projectiles
 		@Dylan
-	--give the aliens the ability to fire projectiles
+	give the aliens the ability to fire projectiles
 		@Dylan
 
-	cap the fire rate so we can't just have a beam of projectiles by holding spacebar
+	--cap the fire rate so we can't just have a beam of projectiles by holding spacebar
+		@Ryan
 	
 	collision handling
 		projectile on actor:
@@ -43,5 +44,5 @@ TODO:
 		implement wall-collision detecting and move the aliens in their proper march
 	--add more backgrounds for more levels?
 		@Ryan & Dylan & Matt
-	--make music loop with pyray
+	make music loop with pyray
 		@Dylan

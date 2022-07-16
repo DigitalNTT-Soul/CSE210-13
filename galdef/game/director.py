@@ -19,7 +19,7 @@ from game.scripting.script import Script
 from game.scripting.move_actors_action import MoveActorsAction
 from game.scripting.draw_actors_action import DrawActorsAction
 from game.scripting.control_ship_action import ControlShipAction
-from game.scripting.control_alien_action import ControlAlienAction
+from game.scripting.move_alien_action import MoveAlienAction
 from game.scripting.player_fire_projectile_action import PlayerFireProjectileAction
 from game.scripting.bullet_collide_alien_action import BulletCollideAlienAction
 
@@ -105,8 +105,8 @@ class Director:
         # Come up with input, update, and output actions to script
         self._script.add_action("input", ControlShipAction(self._keyboard_service))
         self._script.add_action("input", PlayerFireProjectileAction(self._keyboard_service, self._sound_service))
-        self._script.add_action("update", ControlAlienAction())
         self._script.add_action("update", BulletCollideAlienAction(self._physics_service, self._sound_service))
+        self._script.add_action("update", MoveAlienAction())
         self._script.add_action("update", MoveActorsAction())
         self._script.add_action("output", DrawActorsAction(self._video_service))
 
@@ -175,14 +175,14 @@ class Director:
         
     def _add_alien_grid(self):
         self._cast.clear_actors(ALIEN_GROUP)
-        alien_grid = [] #testing something
+        alien_grid = [] # testing something
         for i in range(5):
-            alien_grid.append([]) #testing something
+            alien_grid.append([]) # testing something
             for j in range(10):
                 # x = j * ALIEN_WIDTH
                 # y = i * ALIEN_HEIGHT
                 # self._add_alien(Point(x, y))
-                alien = self._add_alien(j, i) #J comes first because it's the X variable
+                alien = self._add_alien(j, i) # J comes first because it's the X variable
                 alien_grid[i].append(alien)
 
         self._cast.add_actor(ALIEN_GROUP, alien_grid) #testing something
