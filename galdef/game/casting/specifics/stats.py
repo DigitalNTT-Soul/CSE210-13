@@ -40,6 +40,11 @@ class Stats(Actor):
             A number representing the lives.
         """
         return self._lives
+
+    def give_life(self):
+        """Gives one life."""
+        if self._score % 100 == 0:
+            self._lives += 1
   
     def get_score(self):
         """Gets the score.
