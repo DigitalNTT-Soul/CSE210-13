@@ -30,6 +30,7 @@ class BulletCollideAlienAction(Action):
                         self._sound_service.play_sound(sound)
                         points = alien.get_points()
                         stats.add_points(points)
+                        stats.add_kill()
                         cast.remove_actor(PROJECTILE_GROUP, bullet)
                         # remove alien actor from grid, but not from cast.
                         row.remove(alien)

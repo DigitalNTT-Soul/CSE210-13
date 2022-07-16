@@ -52,15 +52,14 @@ class DrawActorsAction(Action):
 
     def _draw_hud(self, cast):
         stats = cast.get_first_actor(STATS_GROUP)
-        self._draw_text_actor(cast, LEVEL_GROUP, stats.get_level())
-        self._draw_text_actor(cast, SCORE_GROUP, stats.get_score())
-        self._draw_text_actor(cast, LIVES_GROUP, stats.get_lives())
-        self._draw_text_actor(cast, KILLS_GROUP, stats.get_kills())
+        self._draw_text_actor(cast, LEVEL_GROUP, LEVEL_FORMAT, stats.get_level())
+        self._draw_text_actor(cast, SCORE_GROUP, SCORE_FORMAT, stats.get_score())
+        self._draw_text_actor(cast, LIVES_GROUP, LIVES_FORMAT, stats.get_lives())
+        self._draw_text_actor(cast, KILLS_GROUP, KILLS_FORMAT, stats.get_kills())
 
-    def _draw_text_actor(self, cast, group, data):
+    def _draw_text_actor(self, cast, group, format_str, data):
         label = cast.get_first_actor(group)
         text = label.get_text()
-        format_str = text.get_value()
         text.set_value(format_str.format(data))
         position = label.get_position()
         self._video_service.draw_text(text, position)
