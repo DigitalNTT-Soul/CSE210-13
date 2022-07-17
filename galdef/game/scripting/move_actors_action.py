@@ -10,8 +10,12 @@ class MoveActorsAction(Action):
         ship = cast.get_first_actor(SHIP_GROUP)
         ship.move_next()
 
-        projectiles = cast.get_actors(SHIP_PROJECTILE_GROUP)
-        for projectile in projectiles:
+        ship_projectiles = cast.get_actors(SHIP_PROJECTILE_GROUP)
+        for projectile in ship_projectiles:
+            projectile.move_next()
+
+        alien_projectiles = cast.get_actors(ALIEN_PROJECTILE_GROUP)
+        for projectile in alien_projectiles:
             projectile.move_next()
 
         alien_grid = cast.get_first_actor(ALIEN_GROUP)
