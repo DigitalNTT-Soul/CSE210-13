@@ -92,6 +92,15 @@ ALIEN_IMAGES = {
     "p": [f"galdef/assets/images/{i:03}.png" for i in range(30,39)],
     "y": [f"galdef/assets/images/{i:03}.png" for i in range(40,49)]
 }
+EXPLOSION_GROUP = "explosions".lower()
+EXPLOSION_IMAGES = {
+    "explosion": [f"batter/assets/images/{i:03}.png" for i in range(500,505)],
+}
+EXPLOSION_WIDTH = 80
+EXPLOSION_HEIGHT = 80
+EXPLOSION_VELOCITY = 0
+
+
 ALIEN_WIDTH = 50
 ALIEN_HEIGHT = 40
 ALIEN_DELAY = 0.5
