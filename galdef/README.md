@@ -1,30 +1,17 @@
-# Greed
-
-greed; noun
- 
-/grēd/
-
- An intense and selfish desire for something, especially wealth, power, food, or resources.
-
- "Greed motivated the miner to collect as many gems as possible, while leaving only the rocks for the other miners" 
-
+# Galactic Defense
 ---
 
-Greed is a game in which the player seeks to gather as many falling gems as possible. The game continues as long as the player wants more!
+This game combines 80's nostalgia with Modern Python. If you loved Space Invaders (Atari fans anyone??), you'll appreciate this modern interpretation of an old classic.
+
 
 ## Getting Started
-
 ---
 
 Make sure you have Python 3.10.4 or newer installed and running on your machine. Open terminal or PowerShell and
-browse to the project's root folder. Start the program by running the following command.
+browse to the project's root folder. Start the program by running the following command"
 
 ```
-pip install raylib
-```
-
-```
-python3 greed
+python galdef or python3 galdef
 ```
 
 You can also run the program from an IDE like Visual Studio Code. Start your IDE and open the
@@ -42,7 +29,6 @@ There are some rules to this game and are listed as follows:
 The goal of the game is to collect as many falling gems as possible.
 
 ## Project Structure
-
 ---
 
 ```
@@ -67,30 +53,17 @@ root                          (project root folder)
 ```
 
 ## Required Technologies
-
 ---
 
 Python 3.10.4
+raylib
+
 
 ## Authors
-
 ---
 
-* Dylan Ruppell (ruppelld@byui.edu) (github: DigitalNTT-Soul):
-  - Basic gravity (tunable via config, no floor yet for the player)
-  - external config file
-  - advised on other code
-* Austin Donovan (iskarr9g@gmail.com) (github: Iskarr):
-  - First draft of scoring system
-  - First draft of Gem and Rock classes that were later merged into Debris class
-  - advised on other code
-* Matt Pellét (mattpellet@byui.edu) (github: m4j0rCSE):
-  - Jump command
-  - advised on other code
-  - Some QA conducted
-* Larry Brys (bry21010@byui.edu) (github: ljbrys):
-  - Floor for player to stand on. (i.e. gravity can't push him through)
-  - advised on other code
-* Ryan Manthey (ryanscom@byui.edu) (github: ryanscom):
-  - First Draft of deleting objects when they pass through the floor
-  - advised on other code
+* Dylan Ruppell (ruppelld@byui.edu) (github: DigitalNTT-Soul)
+* Austin Donovan (iskarr9g@gmail.com) (github: Iskarr)
+* Matt Pellét (mattpellet@byui.edu) (github: m4j0rCSE)
+* Larry Brys (bry21010@byui.edu) (github: ljbrys)
+* Ryan Manthey (ryanscom@byui.edu) (github: ryanscom)
