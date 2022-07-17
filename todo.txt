@@ -54,3 +54,4 @@ TODO:
 	make music loop with pyray
 	--mute music
 		@Dylan
+	prune explosions
