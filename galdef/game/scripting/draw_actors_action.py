@@ -42,10 +42,15 @@ class DrawActorsAction(Action):
 
     def _draw_hud(self, cast):
         stats = cast.get_first_actor(STATS_GROUP)
+        message = cast.get_first_actor(MESSAGE_GROUP)
+        message.set_font_size(5)
         self._draw_text_actor(cast, LEVEL_GROUP, LEVEL_FORMAT, stats.get_level())
         self._draw_text_actor(cast, SCORE_GROUP, SCORE_FORMAT, stats.get_score())
         self._draw_text_actor(cast, LIVES_GROUP, LIVES_FORMAT, stats.get_lives())
         self._draw_text_actor(cast, KILLS_GROUP, KILLS_FORMAT, stats.get_kills())
+        self._draw_text_actor(cast, RESTART_MESS_GROUP, RESTART_MESS_FORMAT, message.get_restart_message())
+        self._draw_text_actor(cast, EXIT_MESS_GROUP, EXIT_MESS_FORMAT, message.get_exit_game_message())
+
 
     def _draw_text_actor(self, cast, group, format_str, data):
         label = cast.get_first_actor(group)

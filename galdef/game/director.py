@@ -14,6 +14,7 @@ from game.casting.specifics.ship import Ship
 from game.casting.specifics.alien import Alien
 from game.casting.specifics.background import Background
 from game.casting.specifics.stats import Stats
+from game.casting.specifics.messages import Messages
 
 from game.scripting.script import Script
 from game.scripting.move_alien_action import MoveAlienAction
@@ -120,6 +121,7 @@ class Director:
         self._add_hardcore_flag_actor()
         self._add_background()
         self._add_all_stats()
+        self._add_all_messages()
         self._add_ship()
         self._add_alien_grid()
         
@@ -195,7 +197,9 @@ class Director:
         
     def _add_all_stats(self):
         self._cast.clear_actors(STATS_GROUP)
+        self._cast.clear_actors(MESSAGE_GROUP)
         self._cast.add_actor(STATS_GROUP, Stats())
+        self._cast.add_actor(MESSAGE_GROUP, Messages())
         
         position = Point(HUD_MARGIN, HUD_MARGIN)
         self._add_stat(LEVEL_GROUP, LEVEL_FORMAT, ALIGN_LEFT, position)
@@ -205,6 +209,13 @@ class Director:
         self._add_stat(SCORE_GROUP, SCORE_FORMAT, ALIGN_CENTER, position)
         position = Point(MAX_X - HUD_MARGIN, HUD_MARGIN)
         self._add_stat(LIVES_GROUP, LIVES_FORMAT, ALIGN_RIGHT, position)
+
+    def _add_all_messages(self):
+        position = Point(HUD_MARGIN, MAX_Y - (HUD_MARGIN + 10))
+        self._add_stat(RESTART_MESS_GROUP, RESTART_MESS_FORMAT, ALIGN_LEFT, position)
+        position = Point(MAX_X - HUD_MARGIN, MAX_Y - (HUD_MARGIN + 10))
+        self._add_stat(EXIT_MESS_GROUP, EXIT_MESS_FORMAT, ALIGN_RIGHT, position)
+        
 
     def _add_stat(self, group, format, alignment, position):
         self._cast.clear_actors(group)
