@@ -19,15 +19,15 @@ TODO:
 	--cap the fire rate so we can't just have a beam of projectiles by holding spacebar
 		@Ryan
 	
-	collision handling
+	--collision handling
 		--projectile on ship:
 			@Larry, Dylan
 		--projectile on alien:
 			--delete alien and projectile
 			--increment score and kill_count
 			@Ryan, Dylan, Larry
-		projectile on projectile:
-			delete both projectiles
+		--projectile on projectile:
+			@Ryan, Dylan
 		--player on wall
 			@Dylan
 			--just stop
@@ -57,3 +57,9 @@ TODO:
 		@Dylan
 	--prune explosions
 		@Ryan, Dylan
+
+
+
+	Game Over Screen
+	Aliens can't march past player nose
+	Start Game Screen
