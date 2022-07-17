@@ -17,7 +17,7 @@ class Actor:
         _velocity (Point): The speed and direction.
     """
 
-    def __init__(self, debug = False):
+    def __init__(self):
         """Constructs a new Actor."""
         self._text = ""
         self._font_size = 15

@@ -4,15 +4,14 @@ from game.casting.basics.actor import Actor
 class Explosion(Actor):
     """A solid, rectangular object that can be broken."""
 
-    def __init__(self, body, animation, debug = False):
+    def __init__(self, body, animation):
         """Constructs a new Explosion.
         
         Args:
             body: A new instance of Body.
             image: A new instance of Image.
-            debug: If it is being debugged. 
         """
-        super().__init__(debug)
+        super().__init__()
         self._body = body
         self._animation = animation
         

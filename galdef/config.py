@@ -42,8 +42,8 @@ SCORE_GROUP = "score"
 KILLS_GROUP = "kills"
 LEVEL_FORMAT = "LEVEL: {}"
 LIVES_FORMAT = "LIVES: {}"
-SCORE_FORMAT = "SCORE: {}"
-KILLS_FORMAT = "KILLS: {}"
+SCORE_FORMAT = "SCORE: {:,}"
+KILLS_FORMAT = "KILLS: {:,}"
 
 #COLORS
 WHITE = Color(255, 255, 255)
@@ -121,3 +121,7 @@ SPACE = "space"
 ENTER = "enter"
 PAUSE = "p"
 MUTE = "m"
+RESET = "r"
+HARDCORE = "h"
+PLUS = "+"
+MINUS = "-"

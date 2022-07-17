@@ -1,8 +1,8 @@
 from game.casting.basics.actor import Actor
 
 class Background(Actor):
-    def __init__(self, body, animation, points, debug = False):
-        super().__init__(debug)
+    def __init__(self, body, animation):
+        super().__init__()
         self._body = body
         self._animation = animation
 

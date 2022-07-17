@@ -14,21 +14,26 @@ class KeyboardService:
         """Constructs a new KeyboardService."""
         self._keys = {}
         
-        #movement
+        # movement
         self._keys['a'] = pyray.KEY_A
         self._keys['d'] = pyray.KEY_D
 
         self._keys[LEFT] = pyray.KEY_LEFT
         self._keys[RIGHT] = pyray.KEY_RIGHT
 
-        #attack
+        # attack
         self._keys[SPACE] = pyray.KEY_SPACE
 
-        #restart game
+        # restart game
         self._keys['r'] = pyray.KEY_R
 
-        #mute music
+        # audio
         self._keys[MUTE] = pyray.KEY_M
+        self._keys[PLUS] = pyray.KEY_EQUAL # This is the actual button where the Plus Sign is on the keyboard
+        self._keys[MINUS] = pyray.KEY_MINUS
+
+        # hardcore mode
+        self._keys[HARDCORE] = pyray.KEY_H
         
 
     def is_key_up(self, key):

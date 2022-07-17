@@ -9,6 +9,7 @@ class SoundService:
     def __init__(self):
         self._sounds = {}
         self._muted = False
+        self._master_volume = 1
 
     def initialize(self):
         pyray.init_audio_device()
@@ -48,8 +49,21 @@ class SoundService:
         if self._muted:
             pyray.set_master_volume(0)
         else:
-            pyray.set_master_volume(1)
+            pyray.set_master_volume(self._master_volume)
 
+    def increase_volume(self):
+        self._master_volume += 0.1
+        if self._master_volume > 1:
+            self._master_volume = 1
+        if not self._muted:
+            pyray.set_master_volume(self._master_volume)
+
+    def decrease_volume(self):
+        self._master_volume -= 0.1
+        if self._master_volume < 0:
+            self._master_volume = 0
+        if not self._muted:
+            pyray.set_master_volume(self._master_volume)
         # CHANGE MASTER VOLUME INSTEAD OF THE BELOW
 
         # if self._muted:

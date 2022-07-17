@@ -5,9 +5,9 @@ from game.casting.basics.actor import Actor
 class Stats(Actor):
     """The game stats."""
 
-    def __init__(self, debug = False):
+    def __init__(self):
         """Constructs a new Stats."""
-        super().__init__(debug)
+        super().__init__()
         self._level = 1
         self._lives = DEFAULT_LIVES
         self._score = 0

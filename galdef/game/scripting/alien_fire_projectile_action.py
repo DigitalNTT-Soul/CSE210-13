@@ -1,3 +1,4 @@
+from distutils.command.install_headers import install_headers
 from config import *
 
 import random
@@ -15,12 +16,14 @@ class AlienFireProjectileAction(Action):
         # self._already_shot = False
         
 
-    def execute(self, cast, script):        
+    def execute(self, cast, script):
         alien_grid = cast.get_first_actor(ALIEN_GROUP)
+        level = cast.get_first_actor(STATS_GROUP).get_level()
+        is_hardcore = cast.get_first_actor(HARDCORE)[0]
         for row in alien_grid:
             for alien in row:
                 num = random.randint(1,1000)
-                if num == 1:
+                if (is_hardcore and num <= level) or num == 1:
                     self._sound_service.play_sound(ALIEN_BULLET_SOUND)
 
                     alien_position = alien.get_body().get_position()
@@ -36,6 +39,6 @@ class AlienFireProjectileAction(Action):
                     body = Body(projectile_position, size, velocity)
                     animation = Image(ALIEN_PROJECTILE_BULLET_IMAGE)
 
-                    projectile = Projectile(body, animation, alien)
+                    projectile = Projectile(body, animation)
                         
-                    cast.add_actor(ALIEN_PROJECTILE_GROUP, projectile)    
+                    cast.add_actor(ALIEN_PROJECTILE_GROUP, projectile)

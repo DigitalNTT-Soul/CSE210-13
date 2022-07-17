@@ -4,14 +4,14 @@ from game.casting.basics.actor import Actor
 class Label(Actor):
     """A label to be displayed."""
  
-    def __init__(self, text, position, debug = False):
+    def __init__(self, text, position):
         """Constructs a new Label.
         
         Args:
             text: An instance of Text.
             position: An instance of Point.
         """
-        super().__init__(debug)
+        super().__init__()
         self._text = text
         self._position = position
         

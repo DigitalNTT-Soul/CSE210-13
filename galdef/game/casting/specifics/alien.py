@@ -3,11 +3,14 @@ from game.casting.basics.actor import Actor
 from game.shared.point import Point
 
 class Alien(Actor):
-    def __init__(self, body, animation, level, debug = False):
-        super().__init__(debug)
+    def __init__(self, body, animation, level, is_hardcore):
+        super().__init__()
         self._body = body
         self._animation = animation
-        self._level_speed = min(level, 10)
+        speed_cap = 10
+        if is_hardcore:
+            speed_cap = 100
+        self._level_speed = min(level, speed_cap)
         self._points = 50 * (level ** 2)
 
     def __str__(self):

@@ -15,8 +15,8 @@ class PlayerFireProjectileAction(Action):
         self._sound_service = sound_service
 
     def execute(self, cast, script):
-
-        if self._keyboard_service.is_key_pressed(SPACE):
+        is_hardcore = cast.get_first_actor(HARDCORE)[0]
+        if is_hardcore or self._keyboard_service.is_key_pressed(SPACE):
     
             self._sound_service.play_sound(BULLET_SOUND)
 
@@ -36,6 +36,6 @@ class PlayerFireProjectileAction(Action):
             body = Body(projectile_position, size, velocity)
             animation = Image(SHIP_PROJECTILE_BULLET_IMAGE)
 
-            projectile = Projectile(body, animation, ship)
+            projectile = Projectile(body, animation)
             
             cast.add_actor(SHIP_PROJECTILE_GROUP, projectile)

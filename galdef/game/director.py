@@ -16,18 +16,20 @@ from game.casting.specifics.background import Background
 from game.casting.specifics.stats import Stats
 
 from game.scripting.script import Script
+from game.scripting.move_alien_action import MoveAlienAction
 from game.scripting.move_actors_action import MoveActorsAction
+from game.scripting.mute_unmute_action import MuteUnmuteAction
 from game.scripting.draw_actors_action import DrawActorsAction
 from game.scripting.control_ship_action import ControlShipAction
-from game.scripting.move_alien_action import MoveAlienAction
-from game.scripting.mute_unmute_action import MuteUnmuteAction
-from game.scripting.player_fire_projectile_action import PlayerFireProjectileAction
-from game.scripting.alien_fire_projectile_action import AlienFireProjectileAction
-from game.scripting.bullet_collide_ship_action import BulletCollideShipAction
-from game.scripting.bullet_collide_bullet_action import BulletCollideBulletAction
-from game.scripting.bullet_collide_alien_action import BulletCollideAlienAction
 from game.scripting.prune_explosions_action import PruneExplosionsAction
 from game.scripting.prune_missed_shots_action import PruneMissedShotsAction
+from game.scripting.bullet_collide_ship_action import BulletCollideShipAction
+from game.scripting.bullet_collide_alien_action import BulletCollideAlienAction
+from game.scripting.bullet_collide_bullet_action import BulletCollideBulletAction
+from game.scripting.alien_fire_projectile_action import AlienFireProjectileAction
+from game.scripting.player_fire_projectile_action import PlayerFireProjectileAction
+from game.scripting.toggle_hardcore_mode_action import ToggleHardcoreModeAction
+from game.scripting.icnrease_decrease_volume_action import IncreaseDecreaseVolumeAction
 
 from game.services.video_service import VideoService
 from game.services.sound_service import SoundService
@@ -81,8 +83,10 @@ class Director:
             if (self._cast.get_first_actor(ALIEN_GROUP) == []):
                 stats = self._cast.get_first_actor(STATS_GROUP)
                 stats.next_level()
+                stats.add_life()
                 self._add_alien_grid()
                 self._add_background()
+
             if (self._cast.get_actors(SHIP_GROUP) == []):
                 stats = self._cast.get_first_actor(STATS_GROUP)
                 if stats.get_lives():
@@ -113,15 +117,19 @@ class Director:
         self._video_service.load_fonts("galdef/assets/fonts")
         self._sound_service.initialize()
         self._sound_service.load_sounds("galdef/assets/sounds")
+        self._add_hardcore_flag_actor()
         self._add_background()
         self._add_all_stats()
         self._add_ship()
         self._add_alien_grid()
+        
 
         # Come up with input, update, and output actions to script
         self._script.add_action("input", ControlShipAction(self._keyboard_service))
         self._script.add_action("input", MuteUnmuteAction(self._keyboard_service, self._sound_service))
+        self._script.add_action("input", IncreaseDecreaseVolumeAction(self._keyboard_service, self._sound_service))
         self._script.add_action("input", PlayerFireProjectileAction(self._keyboard_service, self._sound_service))
+        self._script.add_action("input", ToggleHardcoreModeAction(self._keyboard_service))
         self._script.add_action("update", AlienFireProjectileAction(self._sound_service))
         self._script.add_action("update", BulletCollideAlienAction(self._physics_service, self._sound_service))
         self._script.add_action("update", BulletCollideShipAction(self._physics_service,self._sound_service))
@@ -153,7 +161,7 @@ class Director:
         body = Body(position, size, velocity)
         image_num = randint(0, len(BACKGROUND_IMAGES)-1)
         image = Image(BACKGROUND_IMAGES[image_num])
-        background = Background(body, image, True)
+        background = Background(body, image)
         self._cast.add_actor(BACKGROUND_GROUP, background)
 
     def _add_ship(self):
@@ -179,7 +187,8 @@ class Director:
         alien_img_num = randint(0, len(ALIEN_IMAGES) - 1)
         animation = Animation(ALIEN_IMAGES[alien_img_num], ALIEN_RATE, ALIEN_DELAY)
         level = self._cast.get_first_actor(STATS_GROUP).get_level()
-        alien = Alien(body, animation, level)
+        is_hardcore = self._cast.get_first_actor(HARDCORE)[0]
+        alien = Alien(body, animation, level, is_hardcore)
         alien.march_right()
         # self._cast.add_actor(ALIEN_GROUP, alien)
         return alien
@@ -216,3 +225,7 @@ class Director:
                 alien_grid[i].append(alien)
 
         self._cast.add_actor(ALIEN_GROUP, alien_grid) #testing something
+    
+    def _add_hardcore_flag_actor(self):
+        self._cast.clear_actors(HARDCORE)
+        self._cast.add_actor(HARDCORE, [False])

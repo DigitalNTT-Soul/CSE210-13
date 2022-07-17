@@ -10,13 +10,9 @@ class VideoService:
     on the screen. 
     """
 
-    def __init__(self, debug = False):
-        """Constructs a new VideoService using the specified debug mode.
-        
-        Args:
-            debug (bool): whether or not to draw in debug mode.
+    def __init__(self):
+        """Constructs a new VideoService
         """
-        self._debug = debug
         self._textures = {}
         self._fonts = {}
 
@@ -47,8 +43,8 @@ class VideoService:
         """
         pyray.begin_drawing()
         pyray.clear_background(pyray.BLACK)
-        if self._debug == True:
-            self._draw_grid()
+        # if DEBUG:
+        #     self._draw_grid() # commenting out because draw_grid doesn't currently exist
     
     def flush_buffer(self):
         """Copies the buffer contents to the screen. This method should be called at the end of
