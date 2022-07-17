@@ -52,5 +52,5 @@ TODO:
 	--add more backgrounds for more levels?
 		@Ryan & Dylan & Matt
 	make music loop with pyray
-	mute music
+	--mute music
 		@Dylan
