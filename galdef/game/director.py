@@ -23,7 +23,8 @@ from game.scripting.move_alien_action import MoveAlienAction
 from game.scripting.mute_unmute_action import MuteUnmuteAction
 from game.scripting.player_fire_projectile_action import PlayerFireProjectileAction
 from game.scripting.bullet_collide_alien_action import BulletCollideAlienAction
-from game.scripting.prune_explosions_action import PruneExposionsAction
+from game.scripting.prune_explosions_action import PruneExplosionsAction
+from game.scripting.prune_missed_shots_action import PruneMissedShotsAction
 from game.scripting.alien_fire_projectile_action import AlienFireProjectileAction
 
 from game.services.video_service import VideoService
@@ -115,7 +116,8 @@ class Director:
         self._script.add_action("update", MoveAlienAction())
         self._script.add_action("update", AlienFireProjectileAction(self._sound_service))
         self._script.add_action("update", MoveActorsAction())
-        self._script.add_action("upade", PruneExposionsAction())
+        self._script.add_action("update", PruneExplosionsAction())
+        self._script.add_action("update", PruneMissedShotsAction())
         self._script.add_action("output", DrawActorsAction(self._video_service))
         
 
@@ -161,6 +163,7 @@ class Director:
         animation = Animation(ALIEN_IMAGES[alien_img_num], ALIEN_RATE, ALIEN_DELAY)
         level = self._cast.get_first_actor(STATS_GROUP).get_level()
         alien = Alien(body, animation, level)
+        alien.march_right()
         # self._cast.add_actor(ALIEN_GROUP, alien)
         return alien
         
