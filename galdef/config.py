@@ -86,12 +86,12 @@ SHIP_VELOCITY = 7
 
 # ALIEN
 ALIEN_GROUP = "aliens".lower()
-ALIEN_IMAGES = {
-    "b": [f"galdef/assets/images/{i:03}.png" for i in range(10,19)],
-    "g": [f"galdef/assets/images/{i:03}.png" for i in range(20,29)],
-    "p": [f"galdef/assets/images/{i:03}.png" for i in range(30,39)],
-    "y": [f"galdef/assets/images/{i:03}.png" for i in range(40,49)]
-}
+ALIEN_IMAGES = [
+    [f"galdef/assets/images/{i:03}.png" for i in range(10,19)],
+    [f"galdef/assets/images/{i:03}.png" for i in range(20,29)],
+    [f"galdef/assets/images/{i:03}.png" for i in range(30,39)],
+    [f"galdef/assets/images/{i:03}.png" for i in range(40,49)]
+]
 ALIEN_WIDTH = 50
 ALIEN_HEIGHT = 40
 ALIEN_DELAY = 0.5
