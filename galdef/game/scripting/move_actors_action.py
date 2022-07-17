@@ -10,7 +10,7 @@ class MoveActorsAction(Action):
         ship = cast.get_first_actor(SHIP_GROUP)
         ship.move_next()
 
-        projectiles = cast.get_actors(PROJECTILE_GROUP)
+        projectiles = cast.get_actors(SHIP_PROJECTILE_GROUP)
         for projectile in projectiles:
             projectile.move_next()
 
