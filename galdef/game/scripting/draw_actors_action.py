@@ -43,7 +43,6 @@ class DrawActorsAction(Action):
     def _draw_hud(self, cast):
         stats = cast.get_first_actor(STATS_GROUP)
         message = cast.get_first_actor(MESSAGE_GROUP)
-        message.set_font_size(5)
         self._draw_text_actor(cast, LEVEL_GROUP, LEVEL_FORMAT, stats.get_level())
         self._draw_text_actor(cast, SCORE_GROUP, SCORE_FORMAT, stats.get_score())
         self._draw_text_actor(cast, LIVES_GROUP, LIVES_FORMAT, stats.get_lives())
@@ -58,7 +57,7 @@ class DrawActorsAction(Action):
         text.set_value(format_str.format(data))
         position = label.get_position()
         self._video_service.draw_text(text, position)
-        
+      
     def _draw_other_image_actors(self, cast, group):
         actors = cast.get_actors(group)
         for actor in actors:

@@ -211,15 +211,21 @@ class Director:
         self._add_stat(LIVES_GROUP, LIVES_FORMAT, ALIGN_RIGHT, position)
 
     def _add_all_messages(self):
-        position = Point(HUD_MARGIN, MAX_Y - (HUD_MARGIN + 10))
-        self._add_stat(RESTART_MESS_GROUP, RESTART_MESS_FORMAT, ALIGN_LEFT, position)
-        position = Point(MAX_X - HUD_MARGIN, MAX_Y - (HUD_MARGIN + 10))
-        self._add_stat(EXIT_MESS_GROUP, EXIT_MESS_FORMAT, ALIGN_RIGHT, position)
+        position = Point(HUD_MARGIN, MAX_Y - (HUD_MARGIN))
+        self._add_message(RESTART_MESS_GROUP, RESTART_MESS_FORMAT, ALIGN_LEFT, position)
+        position = Point(MAX_X + 40, MAX_Y - (HUD_MARGIN))
+        self._add_message(EXIT_MESS_GROUP, EXIT_MESS_FORMAT, ALIGN_CENTER, position)
         
 
     def _add_stat(self, group, format, alignment, position):
         self._cast.clear_actors(group)
         text = Text(format, FONT_FILE, FONT_SMALL, alignment)
+        label = Label(text, position)
+        self._cast.add_actor(group, label)
+
+    def _add_message(self, group, format, alignment, position):
+        self._cast.clear_actors(group)
+        text = Text(format, FONT_FILE, 10, alignment)
         label = Label(text, position)
         self._cast.add_actor(group, label)
         

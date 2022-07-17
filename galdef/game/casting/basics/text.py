@@ -50,3 +50,11 @@ class Text:
             A string containing the text's value.
         """
         self._value = value
+
+    def set_font_size(self, font_size):
+        """Sets the font size
+
+        Args:
+            A string containing the font's size
+        """
+        self._size = font_size
