@@ -41,7 +41,7 @@ class BulletCollideAlienAction(Action):
                         points = alien.get_points()
                         stats.add_points(points)
                         stats.add_kill()
-                        cast.remove_actor(PROJECTILE_GROUP, bullet)
+                        cast.remove_actor(SHIP_PROJECTILE_GROUP, bullet)
                         # remove alien actor from grid, but not from cast.
                         row.remove(alien)
                         if row == []:

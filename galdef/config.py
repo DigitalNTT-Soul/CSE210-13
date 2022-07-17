@@ -92,6 +92,14 @@ ALIEN_IMAGES = {
     "p": [f"galdef/assets/images/{i:03}.png" for i in range(30,39)],
     "y": [f"galdef/assets/images/{i:03}.png" for i in range(40,49)]
 }
+ALIEN_WIDTH = 50
+ALIEN_HEIGHT = 40
+ALIEN_DELAY = 0.5
+ALIEN_RATE = 4
+ALIEN_GRID_ROWS = 5
+ALIEN_GRID_COLUMNS = 10
+
+
 EXPLOSION_GROUP = "explosions".lower()
 EXPLOSION_IMAGES = {
     "explosions": [f"galdef/assets/images/{i:03}.png" for i in range(500,504)],
@@ -99,12 +107,6 @@ EXPLOSION_IMAGES = {
 EXPLOSION_WIDTH = 80
 EXPLOSION_HEIGHT = 80
 EXPLOSION_VELOCITY = 0
-
-
-ALIEN_WIDTH = 50
-ALIEN_HEIGHT = 40
-ALIEN_DELAY = 0.5
-ALIEN_RATE = 4
 
 # DIALOG
 DIALOG_GROUP = "dialogs"

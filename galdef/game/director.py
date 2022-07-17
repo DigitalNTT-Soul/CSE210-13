@@ -53,7 +53,6 @@ class Director:
         self._cast = Cast() 
         self._script = Script()
         self._play_new_round = True
-        self._level = 1
                
 
     def start_game(self):
@@ -72,6 +71,10 @@ class Director:
             self._execute_actions("input")
             self._execute_actions("update")
             self._execute_actions("output")
+            if (self._cast.get_first_actor(ALIEN_GROUP) == []):
+                stats = self._cast.get_first_actor(STATS_GROUP)
+                stats.next_level()
+                self._add_alien_grid()
         
         self._dismantle_game()
 
@@ -101,7 +104,6 @@ class Director:
         self._add_all_stats()
         self._add_ship()
         self._add_alien_grid()
-        # add level, score, and lives counters
 
         # Come up with input, update, and output actions to script
         self._script.add_action("input", ControlShipAction(self._keyboard_service))
@@ -151,8 +153,8 @@ class Director:
         body = Body(position, size, velocity)
         # image = Image(ALIEN_IMAGES["b"])
         animation = Animation(ALIEN_IMAGES["b"], ALIEN_RATE, ALIEN_DELAY)
-        alien = Alien(body, animation, self._level)
-        # alien = Alien(body, image, self._level)
+        level = self._cast.get_first_actor(STATS_GROUP).get_level()
+        alien = Alien(body, animation, level)
         # self._cast.add_actor(ALIEN_GROUP, alien)
         return alien
         
@@ -178,9 +180,9 @@ class Director:
     def _add_alien_grid(self):
         self._cast.clear_actors(ALIEN_GROUP)
         alien_grid = [] # testing something
-        for i in range(5):
+        for i in range(ALIEN_GRID_ROWS):
             alien_grid.append([]) # testing something
-            for j in range(10):
+            for j in range(ALIEN_GRID_COLUMNS):
                 # x = j * ALIEN_WIDTH
                 # y = i * ALIEN_HEIGHT
                 # self._add_alien(Point(x, y))

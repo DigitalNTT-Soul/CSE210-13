@@ -44,7 +44,8 @@ class DrawActorsAction(Action):
        
         self._draw_other_image_actors(cast, BACKGROUND_GROUP)
         self._draw_other_image_actors(cast, SHIP_GROUP)
-        self._draw_other_image_actors(cast, PROJECTILE_GROUP)
+        self._draw_other_image_actors(cast, SHIP_PROJECTILE_GROUP)
+        self._draw_other_image_actors(cast, ALIEN_PROJECTILE_GROUP)
         self._draw_other_image_actors(cast, EXPLOSION_GROUP)
         self._draw_alien_actors(cast)
         self._draw_hud(cast)
