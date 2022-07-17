@@ -9,6 +9,8 @@ class ControlShipAction(Action):
         
     def execute(self, cast, script):
         ship = cast.get_first_actor(SHIP_GROUP)
+        if not ship:
+            return
         if self._keyboard_service.is_key_down(LEFT) or self._keyboard_service.is_key_down('a'): 
             ship.swing_left()
         elif self._keyboard_service.is_key_down(RIGHT) or self._keyboard_service.is_key_down('d'): 

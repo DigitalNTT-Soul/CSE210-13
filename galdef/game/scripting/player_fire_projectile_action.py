@@ -21,6 +21,8 @@ class PlayerFireProjectileAction(Action):
             self._sound_service.play_sound(BULLET_SOUND)
 
             ship = cast.get_first_actor(SHIP_GROUP)
+            if not ship:
+                return
             ship_position = ship.get_body().get_position()
             ship_x = ship_position.get_x()
             ship_y = ship_position.get_y()

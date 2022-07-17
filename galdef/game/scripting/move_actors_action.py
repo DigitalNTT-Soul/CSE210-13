@@ -8,6 +8,8 @@ class MoveActorsAction(Action):
 
     def execute(self, cast, script):
         ship = cast.get_first_actor(SHIP_GROUP)
+        if not ship:
+            return
         ship.move_next()
 
         ship_projectiles = cast.get_actors(SHIP_PROJECTILE_GROUP)
