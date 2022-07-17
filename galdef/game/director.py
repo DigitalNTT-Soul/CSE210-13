@@ -117,13 +117,9 @@ class Director:
         self._script.add_action("update", MoveAlienAction())
         self._script.add_action("update", AlienFireProjectileAction(self._sound_service))
         self._script.add_action("update", MoveActorsAction())
-<<<<<<< HEAD
-        self._script.add_action("upade", PruneExposionsAction())
         self._script.add_action("update",BulletCollideShipAction(self._physics_service,self._sound_service))
-=======
         self._script.add_action("update", PruneExplosionsAction())
         self._script.add_action("update", PruneMissedShotsAction())
->>>>>>> c30000978ebf693538458c53524c33ac8d25e567
         self._script.add_action("output", DrawActorsAction(self._video_service))
         
         
