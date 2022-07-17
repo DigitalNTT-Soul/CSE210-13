@@ -8,7 +8,7 @@ class MoveAlienAction(Action):
     def __init__(self):
         self._grid_colliding_left = False
         self._grid_colliding_right = False
-        self._grid_against_left = True # this starts as true because the aliens spawn in top left corner.
+        self._grid_against_left = False
         self._grid_against_right = False
         self._collision_velocity = Point()
         self._next_march = "right"

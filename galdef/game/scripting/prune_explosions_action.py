@@ -1,10 +1,9 @@
-
 from config import *
 
 from game.scripting.action import Action
 from game.scripting.action import Action
 
-class PruneExposionsAction(Action):
+class PruneExplosionsAction(Action):
 
     def __init__(self):
         pass
