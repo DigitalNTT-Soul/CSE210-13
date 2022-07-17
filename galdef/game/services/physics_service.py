@@ -1,7 +1,5 @@
 import pyray
 
-
-
 class PhysicsService():
     """ A PhysicsService."""
     def __init__(self):

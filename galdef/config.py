@@ -100,7 +100,6 @@ ALIEN_RATE = 4
 ALIEN_GRID_ROWS = 5
 ALIEN_GRID_COLUMNS = 10
 
-
 EXPLOSION_GROUP = "explosions".lower()
 EXPLOSION_IMAGES = {
     "explosions": [f"galdef/assets/images/{i:03}.png" for i in range(500,506)],
@@ -122,4 +121,3 @@ SPACE = "space"
 ENTER = "enter"
 PAUSE = "p"
 MUTE = "m"
-
