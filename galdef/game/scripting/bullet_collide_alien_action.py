@@ -16,6 +16,7 @@ class BulletCollideAlienAction(Action):
     def __init__(self, physics_service, sound_service):
         self._physics_service = physics_service
         self._sound_service = sound_service
+        self._exposion = ""
         
     def execute(self, cast, script):
         bullets = cast.get_actors(SHIP_PROJECTILE_GROUP)
@@ -46,8 +47,7 @@ class BulletCollideAlienAction(Action):
                         row.remove(alien)
                         if row == []:
                             alien_grid.remove(row)
-                         # RYAN' playing with adding explosions...
-                    # comment out group below so stop the mess!!!
+                      
                         alien_position = alien.get_body().get_position()
                         alien_x = alien_position.get_x()
                         alien_y = alien_position.get_y()
@@ -58,10 +58,11 @@ class BulletCollideAlienAction(Action):
                         velocity = Point(0, EXPLOSION_VELOCITY)
                         body = Body(explosion_position, size, velocity)
                         animation = Animation(EXPLOSION_IMAGES["explosions"])
-                        explosion = Explosion(body, animation, alien)  
-                        cast.add_actor(EXPLOSION_GROUP, explosion)
-                        # cast.remove_actor(EXPLOSION_GROUP, explosion)
-
+                        self._explosion = Explosion(body, animation, alien)  
+                        cast.add_actor(EXPLOSION_GROUP, self._explosion)
+                       
+    def get_explosion(self):
+        return self._explosion
 
                         
 

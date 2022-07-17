@@ -30,18 +30,6 @@ class DrawActorsAction(Action):
         """
         self._video_service.clear_buffer()
 
-        # scores = cast.get_actors("scores")
-        # for score in scores:
-        #     self._video_service.draw_actor(score)
-
-        # cycles = cast.get_actors("cycles")
-        # for cycle in cycles:
-        #     self._video_service.draw_actors(cycle.get_segments())
-
-        # messages = cast.get_actors("messages")
-        # self._video_service.draw_actors(messages, True)
-
-       
         self._draw_other_image_actors(cast, BACKGROUND_GROUP)
         self._draw_other_image_actors(cast, SHIP_GROUP)
         self._draw_other_image_actors(cast, SHIP_PROJECTILE_GROUP)
