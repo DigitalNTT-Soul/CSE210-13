@@ -45,10 +45,12 @@ TODO:
 	--add scoreboard
 		@Dylan & Ryan
 	--add point values to aliens
+		@Dylan
 	--move the aliens
 		--move the aliens straight forward
 			@Austin & Dylan
 		--implement wall-collision detecting and move the aliens in their proper march
+			@Dylan
 	--add more backgrounds for more levels?
 		@Ryan & Dylan & Matt
 	--make music loop with pyray
