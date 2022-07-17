@@ -94,7 +94,7 @@ ALIEN_IMAGES = {
 }
 EXPLOSION_GROUP = "explosions".lower()
 EXPLOSION_IMAGES = {
-    "explosion": [f"batter/assets/images/{i:03}.png" for i in range(500,505)],
+    "explosions": [f"galdef/assets/images/{i:03}.png" for i in range(500,504)],
 }
 EXPLOSION_WIDTH = 80
 EXPLOSION_HEIGHT = 80
