@@ -102,7 +102,7 @@ ALIEN_GRID_COLUMNS = 10
 
 EXPLOSION_GROUP = "explosions".lower()
 EXPLOSION_IMAGES = {
-    "explosions": [f"galdef/assets/images/{i:03}.png" for i in range(500,504)],
+    "explosions": [f"galdef/assets/images/{i:03}.png" for i in range(500,506)],
 }
 EXPLOSION_WIDTH = 80
 EXPLOSION_HEIGHT = 80
