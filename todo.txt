@@ -14,21 +14,25 @@ TODO:
 	--give the ship the ability to fire projectiles
 		@Dylan
 	give the aliens the ability to fire projectiles
-		@Dylan
 
 	--cap the fire rate so we can't just have a beam of projectiles by holding spacebar
 		@Ryan
 	
 	collision handling
-		projectile on actor:
+		projectile on ship:
 			delete both projectile and actor
+		--projectile on alien:
+			--delete alien and projectile
+			--increment score and kill_count
+			@Ryan, Dylan, Larry
 		projectile on projectile:
 			delete both projectiles
 		--player on wall
 			@Dylan
 			--just stop
-		alien on wall
-			march_forward, then march to opposite side
+		--alien on wall
+			--march_forward, then march to opposite side
+			@Dylan, mostly finished
 	--add lives counter
 		@Dylan & Ryan
 	lives handling
@@ -37,12 +41,13 @@ TODO:
 	implement extra levels (infinite procedural generation of aliens?)
 	--add scoreboard
 		@Dylan & Ryan
-	add point values to aliens
-	move the aliens
+	--add point values to aliens
+	--move the aliens
 		--move the aliens straight forward
 			@Austin & Dylan
-		implement wall-collision detecting and move the aliens in their proper march
+		--implement wall-collision detecting and move the aliens in their proper march
 	--add more backgrounds for more levels?
 		@Ryan & Dylan & Matt
 	make music loop with pyray
+	mute music
 		@Dylan
