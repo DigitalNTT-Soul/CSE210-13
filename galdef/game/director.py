@@ -124,7 +124,7 @@ class Director:
         self._script.add_action("update", AlienFireProjectileAction(self._sound_service))
         self._script.add_action("update", MoveActorsAction())
         self._script.add_action("update", BulletCollideShipAction(self._physics_service,self._sound_service))
-        # self._script.add_action("update", PruneExplosionsAction())
+        self._script.add_action("update", PruneExplosionsAction())
         self._script.add_action("update", PruneMissedShotsAction())
         self._script.add_action("output", DrawActorsAction(self._video_service))
         
