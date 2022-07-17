@@ -25,12 +25,13 @@ class Alien(Actor):
     def move_next(self):
         velocity = self._body.get_velocity()
         position = self._body.get_position().add(velocity)
+        technical_right_wall = MAX_X - self._body.get_size().get_x()
 
         x = position.get_x()
         if x < 0:
             position = Point(0, position.get_y())
-        if x > MAX_X - ALIEN_WIDTH:
-            position = Point(MAX_X - ALIEN_WIDTH, position.get_y())
+        elif x > technical_right_wall:
+            position = Point(technical_right_wall, position.get_y())
 
         self._body.set_position(position)
 
@@ -46,8 +47,17 @@ class Alien(Actor):
         velocity = Point(0, ALIEN_HEIGHT)
         self._body.set_velocity(velocity)
 
+    def set_specific_velocity(self, velocity):
+        self._body.set_velocity(velocity)
+
     def get_points(self):
         return self._points
+    
+    def get_level_speed(self):
+        return self._level_speed
+
+    def get_height(self):
+        return self._body.get_size().get_y()
 
     ##############################
     # Animation Handling Section #

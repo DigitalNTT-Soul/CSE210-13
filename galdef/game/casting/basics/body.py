@@ -27,3 +27,25 @@ class Body:
 
     def set_velocity(self, velocity):
         self._velocity = velocity
+
+    def get_center(self):
+        x = self._position.get_x() + (self._size.get_x() / 2)
+        y = self._position.get_y() + (self._size.get_y() / 2)
+        return Point(x, y)
+
+    def get_left(self):
+        return self._position.get_x()
+    
+    def get_right(self):
+        return self._position.get_x() + self._size.get_x()
+    
+    def get_top(self):
+        return self._position.get_y()
+    
+    def get_bottom(self):
+        return self._position.get_y() + self._size.get_y()
+
+    def center_on(self, point):
+        x = point.get_x() - self._size.get_x() / 2
+        y = point.get_y() - self._size.get_y() / 2
+        self._position = Point(x, y)

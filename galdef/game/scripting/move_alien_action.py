@@ -6,56 +6,80 @@ from game.shared.point import Point
 class MoveAlienAction(Action):
 
     def __init__(self):
-        self._grid_colliding_left = False
-        self._grid_colliding_right = False
-        self._grid_colliding_bottom = False
-        self._grid_against_left = False
-        self._grid_against_right = False
-        self._grid_against_bottom = False
+        self._movement_phase = 0 # 0 for moving right, 1 for left, 2 for forward-then-left, 3 for forward-then-right
+        self._left_bound = 0
+        self._right_bound = MAX_X
+        self._bottom_bound = MAX_Y - SHIP_HEIGHT
         self._collision_velocity = Point()
         
     def execute(self, cast, script):
         alien_grid = cast.get_first_actor(ALIEN_GROUP)
-
-        # loop through rows to check just for wall collisions
-        for row in alien_grid:
-            left_alien_current_x = row[0].get_body().get_position().get_x()
-            right_alien_current_x = row[-1].get_body().get_position().get_x()
-            current_grid_x_velocity = row[0].get_body().get_velocity().get_x()
-            if (left_alien_current_x + current_grid_x_velocity) < 0:
-                self._grid_colliding_left = True
-                break
-            if (right_alien_current_x + current_grid_x_velocity) > (MAX_X - ALIEN_WIDTH):
-                self._grid_colliding_right = True
-                break
+        if alien_grid == []:
+            self._movement_phase = 0
+            return
         
-        # march_forward and reset collision booleans if the grid is against a wall.
-        if (self._grid_colliding_left):
-            self._marching_orders(alien_grid, "forward")
-            self._grid_colliding_left = False
-            self._grid_against_left = True
-        elif (self._grid_colliding_right):
-            self._marching_orders(alien_grid, "forward")
-            self._grid_colliding_right = False
-            self._grid_against_right = True
+        vanguard_alien = alien_grid[-1][0]
+        grid_bottom = vanguard_alien.get_body().get_bottom()
+        horizontal_speed = vanguard_alien.get_level_speed()
+        vertical_speed = vanguard_alien.get_height()
+        grid_on_floor = (grid_bottom == self._bottom_bound)
 
-        # march_right if against left wall and not colliding this frame
-        elif self._grid_against_left and not self._grid_colliding_left:
-            self._marching_orders(alien_grid, "right")
-            self._grid_against_left = False
+        match self._movement_phase:
+            case 0: # moving right, so check right edge and wall
+                for row in alien_grid:
+                    row_right_edge = row[-1].get_body().get_right()
+                    if row_right_edge + horizontal_speed > self._right_bound:
+                        gap_width = self._right_bound - row_right_edge
+                        new_velocity = Point(gap_width, 0)
+                        self._marching_orders(alien_grid, new_velocity)
+                        if grid_on_floor:
+                            self._movement_phase = 1 # move grid left next frame
+                        else:
+                            self._movement_phase = 2 # move grid forward next frame
+                        return
+                # this only executes if the loop ends without any row being too close to the wall
+                self._marching_orders(alien_grid, "right") # ensure we move at alien._level_speed
+            case 1: # moving left, so check left edge and wall
+                for row in alien_grid:
+                    row_left_edge = row[0].get_body().get_left()
+                    if row_left_edge - horizontal_speed < self._left_bound:
+                        gap_width = self._left_bound - row_left_edge
+                        new_velocity = Point(gap_width, 0)
+                        self._marching_orders(alien_grid, new_velocity)
+                        if grid_on_floor:
+                            self._movement_phase = 0 # move grid right next frame
+                        else:
+                            self._movement_phase = 3 # move grid forward next frame
+                        return
+                # this only execute if the loop ends without any row being too close to the wall
+                self._marching_orders(alien_grid, "left") # ensure we move at alien._level_speed
+            case 2:
+                if grid_bottom + vertical_speed > self._bottom_bound: # have to get level_speed because grid should have no vertical velocity at this point
+                    gap_width = self._bottom_bound - grid_bottom
+                    new_velocity = Point(0, gap_width)
+                    self._marching_orders(alien_grid, new_velocity)
+                else:
+                    self._marching_orders(alien_grid, "forward")
+                self._movement_phase = 1
+            case 3:
+                if grid_bottom + vertical_speed > self._bottom_bound: # have to get level_speed because grid should have no vertical velocity at this point
+                    gap_width = self._bottom_bound - grid_bottom
+                    new_velocity = Point(0, gap_width)
+                    self._marching_orders(alien_grid, new_velocity)
+                else:
+                    self._marching_orders(alien_grid, "forward")
+                self._movement_phase = 0
 
-        # march_left if against right wall and not colliding this frame
-        elif self._grid_against_right and not self._grid_colliding_right:
-            self._marching_orders(alien_grid, "left")
-            self._grid_against_right = False
-
-    def _marching_orders(self, grid, direction):
+    def _marching_orders(self, grid, velocity):
         for row in grid:
             for alien in row:
-                match direction:
-                    case "left":
-                        alien.march_left()
-                    case "right":
-                        alien.march_right()
-                    case "forward":
-                        alien.march_forward()
+                if isinstance(velocity, Point):
+                    alien.set_specific_velocity(velocity)
+                elif isinstance(velocity, str):
+                    match velocity:
+                        case "left":
+                            alien.march_left()
+                        case "right":
+                            alien.march_right()
+                        case "forward":
+                            alien.march_forward()

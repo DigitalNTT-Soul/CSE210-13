@@ -89,3 +89,8 @@ class Point:
             Point: A new Point that is scaled.
         """
         return Point(self._x * factor, self._y * factor)
+    
+    def average(self, other):
+        x = (self._x + other.get_x()) / 2
+        y = (self._y + other.get_y()) / 2
+        return Point(x, y)

@@ -29,7 +29,7 @@ from game.scripting.bullet_collide_bullet_action import BulletCollideBulletActio
 from game.scripting.alien_fire_projectile_action import AlienFireProjectileAction
 from game.scripting.player_fire_projectile_action import PlayerFireProjectileAction
 from game.scripting.toggle_hardcore_mode_action import ToggleHardcoreModeAction
-from game.scripting.icnrease_decrease_volume_action import IncreaseDecreaseVolumeAction
+from game.scripting.increase_decrease_volume_action import IncreaseDecreaseVolumeAction
 
 from game.services.video_service import VideoService
 from game.services.sound_service import SoundService
@@ -199,9 +199,9 @@ class Director:
         
         position = Point(HUD_MARGIN, HUD_MARGIN)
         self._add_stat(LEVEL_GROUP, LEVEL_FORMAT, ALIGN_LEFT, position)
-        position = Point(2 * (MAX_X/6), HUD_MARGIN)
+        position = Point(2 * (MAX_X/3), HUD_MARGIN)
         self._add_stat(KILLS_GROUP, KILLS_FORMAT, ALIGN_CENTER, position)
-        position = Point(4 * (MAX_X/6), HUD_MARGIN)
+        position = Point((MAX_X/3), HUD_MARGIN)
         self._add_stat(SCORE_GROUP, SCORE_FORMAT, ALIGN_CENTER, position)
         position = Point(MAX_X - HUD_MARGIN, HUD_MARGIN)
         self._add_stat(LIVES_GROUP, LIVES_FORMAT, ALIGN_RIGHT, position)
@@ -214,17 +214,13 @@ class Director:
         
     def _add_alien_grid(self):
         self._cast.clear_actors(ALIEN_GROUP)
-        alien_grid = [] # testing something
+        alien_grid = []
         for i in range(ALIEN_GRID_ROWS):
-            alien_grid.append([]) # testing something
+            alien_grid.append([])
             for j in range(ALIEN_GRID_COLUMNS):
-                # x = j * ALIEN_WIDTH
-                # y = i * ALIEN_HEIGHT
-                # self._add_alien(Point(x, y))
-                alien = self._add_alien(j, i) # J comes first because it's the X variable
+                alien = self._add_alien(j, i)
                 alien_grid[i].append(alien)
-
-        self._cast.add_actor(ALIEN_GROUP, alien_grid) #testing something
+        self._cast.add_actor(ALIEN_GROUP, alien_grid)
     
     def _add_hardcore_flag_actor(self):
         self._cast.clear_actors(HARDCORE)

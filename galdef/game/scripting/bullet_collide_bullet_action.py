@@ -31,21 +31,17 @@ class BulletCollideBulletAction(Action):
                     self._sound_service.play_sound(sound)
         
                     # Find the center of each bullet
-                    ship_bullet_position = ship_bullet_body.get_position() 
-                    ship_bullet_x = ship_bullet_position.get_x() + PROJECTILE_WIDTH / 2
-                    ship_bullet_y = ship_bullet_position.get_y() + PROJECTILE_HEIGHT / 2
-
-                    alien_bullet_position = alien_bullet_body.get_position()
-                    alien_bullet_x = alien_bullet_position.get_x() + PROJECTILE_WIDTH / 2
-                    alien_bullet_y = alien_bullet_position.get_y() + PROJECTILE_HEIGHT / 2
+                    ship_bullet_center = ship_bullet_body.get_center()
+                    alien_bullet_center = alien_bullet_body.get_center()
 
                     # find the collision center by averaging out the bullet centers
-                    center_x = (ship_bullet_x + alien_bullet_x) / 2
-                    center_y = (ship_bullet_y + alien_bullet_y) / 2
+                    collision_center = ship_bullet_center.average(alien_bullet_center)
+                    collision_center_x = collision_center.get_x()
+                    collision_center_y = collision_center.get_y()
 
                     # generate explosion at the collision center
-                    explosion_x = center_x + (PROJECTILE_WIDTH - EXPLOSION_WIDTH) / 2
-                    explosion_y = center_y + (PROJECTILE_HEIGHT - EXPLOSION_HEIGHT) / 2
+                    explosion_x = collision_center_x + (PROJECTILE_WIDTH - EXPLOSION_WIDTH) / 2
+                    explosion_y = collision_center_y + (PROJECTILE_HEIGHT - EXPLOSION_HEIGHT) / 2
                     explosion_position = Point(explosion_x, explosion_y)
                     size = Point(EXPLOSION_WIDTH, EXPLOSION_HEIGHT)
                     velocity = Point(0, 0)
