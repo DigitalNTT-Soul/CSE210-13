@@ -16,7 +16,6 @@ class BulletCollideAlienAction(Action):
     def __init__(self, physics_service, sound_service):
         self._physics_service = physics_service
         self._sound_service = sound_service
-        self._exposion = ""
         
     def execute(self, cast, script):
         bullets = cast.get_actors(SHIP_PROJECTILE_GROUP)
@@ -32,8 +31,6 @@ class BulletCollideAlienAction(Action):
                 for alien in row:
                     bullet_body = bullet.get_body()
                     alien_body = alien.get_body()
-
-                   
 
                     if self._physics_service.has_collided(bullet_body, alien_body):
                         sound_num = randint(0, len(EXPLOSION_SOUNDS)-1)
@@ -58,14 +55,5 @@ class BulletCollideAlienAction(Action):
                         velocity = Point(0, EXPLOSION_VELOCITY)
                         body = Body(explosion_position, size, velocity)
                         animation = Animation(EXPLOSION_IMAGES["explosions"])
-                        self._explosion = Explosion(body, animation, alien)  
-                        cast.add_actor(EXPLOSION_GROUP, self._explosion)
-                       
-    def get_explosion(self):
-        return self._explosion
-
-                        
-
-                        
-
-                        
+                        explosion = Explosion(body, animation, alien)  
+                        cast.add_actor(EXPLOSION_GROUP, explosion)

@@ -19,7 +19,9 @@ class BulletCollideShipAction(Action):
         bullets = cast.get_actors(ALIEN_PROJECTILE_GROUP)
         if bullets == []:
             return
-        ship= cast.get_first_actor(SHIP_GROUP)
+        ship = cast.get_first_actor(SHIP_GROUP)
+        if not ship:
+            return
         stats = cast.get_first_actor(STATS_GROUP)
         
         for bullet in bullets:
@@ -31,7 +33,6 @@ class BulletCollideShipAction(Action):
                 sound = EXPLOSION_SOUNDS[sound_num]
                 self._sound_service.play_sound(sound)
 
-                cast.remove_actor(SHIP_GROUP, bullet)
                 # remove ship actor from grid, but not from cast.
         
                 ship_position = ship_body.get_position() 
@@ -45,6 +46,7 @@ class BulletCollideShipAction(Action):
                 body = Body(explosion_position, size, velocity)
                 animation = Animation(EXPLOSION_IMAGES["explosions"])
                 explosion = Explosion(body, animation, ship)  
+                cast.remove_actor(SHIP_GROUP, ship)
+                cast.remove_actor(ALIEN_PROJECTILE_GROUP, bullet)
                 cast.add_actor(EXPLOSION_GROUP, explosion)
-                       
-   
+                

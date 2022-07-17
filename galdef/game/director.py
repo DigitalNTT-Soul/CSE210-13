@@ -22,11 +22,11 @@ from game.scripting.control_ship_action import ControlShipAction
 from game.scripting.move_alien_action import MoveAlienAction
 from game.scripting.mute_unmute_action import MuteUnmuteAction
 from game.scripting.player_fire_projectile_action import PlayerFireProjectileAction
+from game.scripting.alien_fire_projectile_action import AlienFireProjectileAction
+from game.scripting.bullet_collide_ship_action import BulletCollideShipAction
 from game.scripting.bullet_collide_alien_action import BulletCollideAlienAction
 from game.scripting.prune_explosions_action import PruneExplosionsAction
 from game.scripting.prune_missed_shots_action import PruneMissedShotsAction
-from game.scripting.alien_fire_projectile_action import AlienFireProjectileAction
-from game.scripting.bullet_collide_ship_action import BulletCollideShipAction
 
 from game.services.video_service import VideoService
 from game.services.sound_service import SoundService
@@ -79,8 +79,14 @@ class Director:
                 stats = self._cast.get_first_actor(STATS_GROUP)
                 stats.next_level()
                 self._add_alien_grid()
-        
-        self._dismantle_game()
+                self._add_background()
+            if (self._cast.get_actors(SHIP_GROUP) == []):
+                stats = self._cast.get_first_actor(STATS_GROUP)
+                if stats.get_lives():
+                    self._add_ship()
+                    stats.lose_life()
+                else:
+                    self._reset_game()
 
         self._video_service.close_window()
 
@@ -117,12 +123,16 @@ class Director:
         self._script.add_action("update", MoveAlienAction())
         self._script.add_action("update", AlienFireProjectileAction(self._sound_service))
         self._script.add_action("update", MoveActorsAction())
-        self._script.add_action("update",BulletCollideShipAction(self._physics_service,self._sound_service))
-        self._script.add_action("update", PruneExplosionsAction())
+        self._script.add_action("update", BulletCollideShipAction(self._physics_service,self._sound_service))
+        # self._script.add_action("update", PruneExplosionsAction())
         self._script.add_action("update", PruneMissedShotsAction())
         self._script.add_action("output", DrawActorsAction(self._video_service))
         
-        
+    def _reset_game(self):
+        self._add_background()
+        self._add_all_stats()
+        self._add_ship()
+        self._add_alien_grid()
 
     def _dismantle_game(self):
         self._cast.clear_all_actors()
