@@ -75,8 +75,8 @@ class Director:
             self._execute_actions("input")
             self._execute_actions("update")
             self._execute_actions("output")
-            if self._sound_service.is_sound_playing(GAME_THEME):
-                pass
+            if not self._sound_service.is_sound_playing(GAME_THEME):
+                self._sound_service.play_sound(GAME_THEME)
             if (self._cast.get_first_actor(ALIEN_GROUP) == []):
                 stats = self._cast.get_first_actor(STATS_GROUP)
                 stats.next_level()
@@ -119,13 +119,13 @@ class Director:
 
         # Come up with input, update, and output actions to script
         self._script.add_action("input", ControlShipAction(self._keyboard_service))
-        self._script.add_action("input", PlayerFireProjectileAction(self._keyboard_service, self._sound_service))
         self._script.add_action("input", MuteUnmuteAction(self._keyboard_service, self._sound_service))
+        self._script.add_action("input", PlayerFireProjectileAction(self._keyboard_service, self._sound_service))
+        # self._script.add_action("update", AlienFireProjectileAction(self._sound_service))
         self._script.add_action("update", BulletCollideAlienAction(self._physics_service, self._sound_service))
-        self._script.add_action("update", MoveAlienAction())
-        self._script.add_action("update", AlienFireProjectileAction(self._sound_service))
-        self._script.add_action("update", MoveActorsAction())
         self._script.add_action("update", BulletCollideShipAction(self._physics_service,self._sound_service))
+        self._script.add_action("update", MoveAlienAction())
+        self._script.add_action("update", MoveActorsAction())
         self._script.add_action("update", PruneExplosionsAction())
         self._script.add_action("update", PruneMissedShotsAction())
         self._script.add_action("output", DrawActorsAction(self._video_service))

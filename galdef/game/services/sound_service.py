@@ -41,7 +41,7 @@ class SoundService:
             sound = Sound(sound)
         filepath = str(pathlib.Path(sound.get_filename()))
         sound = self._sounds[filepath]
-        pyray.is_sound_playing(sound)
+        return pyray.is_sound_playing(sound)
 
     def toggle_mute(self):
         self._muted = not self._muted

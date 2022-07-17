@@ -51,7 +51,9 @@ TODO:
 		--implement wall-collision detecting and move the aliens in their proper march
 	--add more backgrounds for more levels?
 		@Ryan & Dylan & Matt
-	make music loop with pyray
+	--make music loop with pyray
+		@Larry, Dylan
 	--mute music
 		@Dylan
-	prune explosions
+	--prune explosions
+		@Ryan, Dylan
