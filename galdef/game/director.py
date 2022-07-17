@@ -24,6 +24,7 @@ from game.scripting.mute_unmute_action import MuteUnmuteAction
 from game.scripting.player_fire_projectile_action import PlayerFireProjectileAction
 from game.scripting.alien_fire_projectile_action import AlienFireProjectileAction
 from game.scripting.bullet_collide_ship_action import BulletCollideShipAction
+from game.scripting.bullet_collide_bullet_action import BulletCollideBulletAction
 from game.scripting.bullet_collide_alien_action import BulletCollideAlienAction
 from game.scripting.prune_explosions_action import PruneExplosionsAction
 from game.scripting.prune_missed_shots_action import PruneMissedShotsAction
@@ -121,13 +122,14 @@ class Director:
         self._script.add_action("input", ControlShipAction(self._keyboard_service))
         self._script.add_action("input", MuteUnmuteAction(self._keyboard_service, self._sound_service))
         self._script.add_action("input", PlayerFireProjectileAction(self._keyboard_service, self._sound_service))
-        # self._script.add_action("update", AlienFireProjectileAction(self._sound_service))
+        self._script.add_action("update", AlienFireProjectileAction(self._sound_service))
         self._script.add_action("update", BulletCollideAlienAction(self._physics_service, self._sound_service))
         self._script.add_action("update", BulletCollideShipAction(self._physics_service,self._sound_service))
         self._script.add_action("update", MoveAlienAction())
         self._script.add_action("update", MoveActorsAction())
         self._script.add_action("update", PruneExplosionsAction())
         self._script.add_action("update", PruneMissedShotsAction())
+        self._script.add_action("update", BulletCollideBulletAction(self._physics_service,self._sound_service))
         self._script.add_action("output", DrawActorsAction(self._video_service))
         
     def _reset_game(self):
