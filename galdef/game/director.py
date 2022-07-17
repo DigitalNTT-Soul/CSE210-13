@@ -121,7 +121,7 @@ class Director:
         self._script.add_action("input", ControlShipAction(self._keyboard_service))
         self._script.add_action("input", MuteUnmuteAction(self._keyboard_service, self._sound_service))
         self._script.add_action("input", PlayerFireProjectileAction(self._keyboard_service, self._sound_service))
-        # self._script.add_action("update", AlienFireProjectileAction(self._sound_service))
+        self._script.add_action("update", AlienFireProjectileAction(self._sound_service))
         self._script.add_action("update", BulletCollideAlienAction(self._physics_service, self._sound_service))
         self._script.add_action("update", BulletCollideShipAction(self._physics_service,self._sound_service))
         self._script.add_action("update", MoveAlienAction())
