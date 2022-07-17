@@ -20,6 +20,9 @@ class Animation:
 
     def get_rate(self):
         return self._rate
+    
+    def get_index(self):
+        return self._index
 
     def next_image(self):
         filename = self._images[self._index]
