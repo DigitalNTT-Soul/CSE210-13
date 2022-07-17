@@ -45,6 +45,10 @@ class SoundService:
 
     def toggle_mute(self):
         self._muted = not self._muted
+        if self._muted:
+            pyray.set_master_volume(0)
+        else:
+            pyray.set_master_volume(1)
 
         # CHANGE MASTER VOLUME INSTEAD OF THE BELOW
 

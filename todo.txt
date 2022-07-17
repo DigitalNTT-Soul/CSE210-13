@@ -13,14 +13,15 @@ TODO:
 		@Dylan
 	--give the ship the ability to fire projectiles
 		@Dylan
-	give the aliens the ability to fire projectiles
+	--give the aliens the ability to fire projectiles
+		@Larry, Dylan
 
 	--cap the fire rate so we can't just have a beam of projectiles by holding spacebar
 		@Ryan
 	
 	collision handling
-		projectile on ship:
-			delete both projectile and actor
+		--projectile on ship:
+			@Larry, Dylan
 		--projectile on alien:
 			--delete alien and projectile
 			--increment score and kill_count
@@ -35,10 +36,12 @@ TODO:
 			@Dylan, mostly finished
 	--add lives counter
 		@Dylan & Ryan
-	lives handling
+	--lives handling
+		@Dylan
 	--add level counter
 		@Dylan & Ryan
-	implement extra levels (infinite procedural generation of aliens?)
+	--implement extra levels (infinite procedural generation of aliens?)
+		@Dylan
 	--add scoreboard
 		@Dylan & Ryan
 	--add point values to aliens
