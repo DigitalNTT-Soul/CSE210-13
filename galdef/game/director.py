@@ -23,7 +23,7 @@ from game.scripting.move_alien_action import MoveAlienAction
 from game.scripting.mute_unmute_action import MuteUnmuteAction
 from game.scripting.player_fire_projectile_action import PlayerFireProjectileAction
 from game.scripting.bullet_collide_alien_action import BulletCollideAlienAction
-
+from game.scripting.prun_explosions_action import PrunExposionsAction
 from game.services.video_service import VideoService
 from game.services.sound_service import SoundService
 from game.services.keyboard_service import KeyboardService
@@ -112,6 +112,7 @@ class Director:
         self._script.add_action("update", BulletCollideAlienAction(self._physics_service, self._sound_service))
         self._script.add_action("update", MoveAlienAction())
         self._script.add_action("update", MoveActorsAction())
+        self._script.add_action("upade", PrunExposionsAction())
         self._script.add_action("output", DrawActorsAction(self._video_service))
 
     def _dismantle_game(self):
