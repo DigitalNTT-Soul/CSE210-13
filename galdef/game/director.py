@@ -75,6 +75,8 @@ class Director:
             self._execute_actions("input")
             self._execute_actions("update")
             self._execute_actions("output")
+            if self._sound_service.is_sound_playing(GAME_THEME):
+                pass
             if (self._cast.get_first_actor(ALIEN_GROUP) == []):
                 stats = self._cast.get_first_actor(STATS_GROUP)
                 stats.next_level()

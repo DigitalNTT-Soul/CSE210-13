@@ -1,6 +1,6 @@
 from game.shared.color import Color
 
-DEBUG = True
+DEBUG = False
 
 MAX_X = 1040
 MAX_Y = 680
