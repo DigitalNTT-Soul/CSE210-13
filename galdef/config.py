@@ -12,7 +12,7 @@ WINDOW_TITLE = "Galaxy Defenders"
 
 #SOUNDS
 GAME_THEME = "galdef/assets/sounds/game_theme.mp3"
-
+ALIEN_BULLET_SOUND = "galdef/assets/sounds/phaser.wav"
 BULLET_SOUND = "galdef/assets/sounds/laser.wav"
 EXPLOSION_SOUNDS = [
     "galdef/assets/sounds/explosion1.wav",

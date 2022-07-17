@@ -21,7 +21,7 @@ class AlienFireProjectileAction(Action):
             for alien in row:
                 num = random.randint(1,1000)
                 if num == 1:
-                    self._sound_service.play_sound(BULLET_SOUND)
+                    self._sound_service.play_sound(ALIEN_BULLET_SOUND)
 
                     alien_position = alien.get_body().get_position()
                     alien_x = alien_position.get_x()
