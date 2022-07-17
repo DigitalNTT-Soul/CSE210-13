@@ -8,11 +8,11 @@ class MoveAlienAction(Action):
     def __init__(self):
         self._grid_colliding_left = False
         self._grid_colliding_right = False
+        self._grid_colliding_bottom = False
         self._grid_against_left = False
         self._grid_against_right = False
+        self._grid_against_bottom = False
         self._collision_velocity = Point()
-        self._next_march = "right"
-        pass
         
     def execute(self, cast, script):
         alien_grid = cast.get_first_actor(ALIEN_GROUP)

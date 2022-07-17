@@ -16,7 +16,8 @@ ALIEN_BULLET_SOUND = "galdef/assets/sounds/phaser.wav"
 BULLET_SOUND = "galdef/assets/sounds/laser.wav"
 EXPLOSION_SOUNDS = [
     "galdef/assets/sounds/explosion1.wav",
-    "galdef/assets/sounds/explosion2.wav"]
+    "galdef/assets/sounds/explosion2.wav"
+]
 
 # FONT
 FONT_FILE = "galdef/assets/fonts/FastHand.ttf" # "galdef/assets/fonts/zorque.otf"

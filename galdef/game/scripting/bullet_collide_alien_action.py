@@ -55,5 +55,5 @@ class BulletCollideAlienAction(Action):
                         velocity = Point(0, EXPLOSION_VELOCITY)
                         body = Body(explosion_position, size, velocity)
                         animation = Animation(EXPLOSION_IMAGES["explosions"])
-                        explosion = Explosion(body, animation, alien)  
+                        explosion = Explosion(body, animation)  
                         cast.add_actor(EXPLOSION_GROUP, explosion)

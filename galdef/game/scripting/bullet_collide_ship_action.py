@@ -45,7 +45,7 @@ class BulletCollideShipAction(Action):
                 velocity = Point(0, 0)
                 body = Body(explosion_position, size, velocity)
                 animation = Animation(EXPLOSION_IMAGES["explosions"])
-                explosion = Explosion(body, animation, ship)  
+                explosion = Explosion(body, animation)  
                 cast.remove_actor(SHIP_GROUP, ship)
                 cast.remove_actor(ALIEN_PROJECTILE_GROUP, bullet)
                 cast.add_actor(EXPLOSION_GROUP, explosion)

@@ -61,7 +61,8 @@ class Cast:
         """
         result = None
         if group in self._actors.keys():
-            result = self._actors[group][0]
+            if (self._actors[group] != []):
+                result = self._actors[group][0]
         return result
 
     def remove_actor(self, group, actor):
