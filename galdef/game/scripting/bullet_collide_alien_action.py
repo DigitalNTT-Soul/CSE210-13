@@ -18,7 +18,7 @@ class BulletCollideAlienAction(Action):
         self._sound_service = sound_service
         
     def execute(self, cast, script):
-        bullets = cast.get_actors(PROJECTILE_GROUP)
+        bullets = cast.get_actors(SHIP_PROJECTILE_GROUP)
         if bullets == []:
             return
         alien_grid = cast.get_first_actor(ALIEN_GROUP)

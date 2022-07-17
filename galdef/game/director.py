@@ -20,6 +20,7 @@ from game.scripting.move_actors_action import MoveActorsAction
 from game.scripting.draw_actors_action import DrawActorsAction
 from game.scripting.control_ship_action import ControlShipAction
 from game.scripting.move_alien_action import MoveAlienAction
+from game.scripting.mute_unmute_action import MuteUnmuteAction
 from game.scripting.player_fire_projectile_action import PlayerFireProjectileAction
 from game.scripting.bullet_collide_alien_action import BulletCollideAlienAction
 
@@ -105,6 +106,7 @@ class Director:
         # Come up with input, update, and output actions to script
         self._script.add_action("input", ControlShipAction(self._keyboard_service))
         self._script.add_action("input", PlayerFireProjectileAction(self._keyboard_service, self._sound_service))
+        self._script.add_action("input", MuteUnmuteAction(self._keyboard_service, self._sound_service))
         self._script.add_action("update", BulletCollideAlienAction(self._physics_service, self._sound_service))
         self._script.add_action("update", MoveAlienAction())
         self._script.add_action("update", MoveActorsAction())

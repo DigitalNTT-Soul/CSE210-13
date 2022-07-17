@@ -53,10 +53,10 @@ BLUE = Color(0, 0, 255)
 PURPLE = Color(255,0,255)
 
 # PROJECTILE
-PROJECTILE_GROUP = "PROJECTILEs".lower()
-
-PROJECTILE_BULLET_IMAGE = "galdef/assets/images/bullet.png"
-PROJECTILE_ALIEN_BULLET_IMAGE = "galdef/assets/images/alien_bullet.png"
+SHIP_PROJECTILE_GROUP = "ship_projectiles".lower()
+ALIEN_PROJECTILE_GROUP = "alien_projectiles".lower()
+SHIP_PROJECTILE_BULLET_IMAGE = "galdef/assets/images/bullet.png"
+ALIEN_PROJECTILE_BULLET_IMAGE = "galdef/assets/images/alien_bullet.png"
 PROJECTILE_WIDTH = 11
 PROJECTILE_HEIGHT = 11
 PROJECTILE_VELOCITY = 10

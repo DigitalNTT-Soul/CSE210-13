@@ -65,7 +65,6 @@ class DrawActorsAction(Action):
         position = label.get_position()
         self._video_service.draw_text(text, position)
         
-
     def _draw_other_image_actors(self, cast, group):
         actors = cast.get_actors(group)
         for actor in actors:

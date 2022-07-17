@@ -33,8 +33,8 @@ class PlayerFireProjectileAction(Action):
             velocity = Point(0, -PROJECTILE_VELOCITY)
 
             body = Body(projectile_position, size, velocity)
-            animation = Image(PROJECTILE_BULLET_IMAGE)
+            animation = Image(SHIP_PROJECTILE_BULLET_IMAGE)
 
             projectile = Projectile(body, animation, ship)
             
-            cast.add_actor(PROJECTILE_GROUP, projectile)
+            cast.add_actor(SHIP_PROJECTILE_GROUP, projectile)
