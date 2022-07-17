@@ -25,6 +25,7 @@ from game.scripting.player_fire_projectile_action import PlayerFireProjectileAct
 from game.scripting.bullet_collide_alien_action import BulletCollideAlienAction
 from game.scripting.prune_explosions_action import PruneExposionsAction
 from game.scripting.alien_fire_projectile_action import AlienFireProjectileAction
+from game.scripting.bullet_collide_ship_action import BulletCollideShipAction
 
 from game.services.video_service import VideoService
 from game.services.sound_service import SoundService
@@ -116,7 +117,9 @@ class Director:
         self._script.add_action("update", AlienFireProjectileAction(self._sound_service))
         self._script.add_action("update", MoveActorsAction())
         self._script.add_action("upade", PruneExposionsAction())
+        self._script.add_action("update",BulletCollideShipAction(self._physics_service,self._sound_service))
         self._script.add_action("output", DrawActorsAction(self._video_service))
+        
         
 
     def _dismantle_game(self):
