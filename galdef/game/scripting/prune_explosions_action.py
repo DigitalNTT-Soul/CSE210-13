@@ -4,7 +4,7 @@ from config import *
 from game.scripting.action import Action
 from game.scripting.action import Action
 
-class PrunExposionsAction(Action):
+class PruneExposionsAction(Action):
 
     def __init__(self):
         pass
