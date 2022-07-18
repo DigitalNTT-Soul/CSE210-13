@@ -96,6 +96,10 @@ class Director:
                 else:
                     self._reset_game()
 
+            if self._keyboard_service.is_key_pressed('r'):
+                        self._reset_game()
+            
+
         self._video_service.close_window()
 
     def _execute_actions(self, group):
