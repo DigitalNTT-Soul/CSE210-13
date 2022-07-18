@@ -1,6 +1,7 @@
 from config import*
 import random
 from game.casting.basics.body import Body
+from game.casting.basics.actor import Actor
 from game.casting.basics.image import Image
 from game.casting.specifics.explosion import Explosion
 from game.casting.basics.animation import Animation
@@ -8,11 +9,13 @@ from game.casting.basics.animation import Animation
 from game.scripting.action import Action
 from game.shared.point import Point
 
-class BulletCollideShipAction(Action):
+class BulletCollideShipAction(Actor):
 
     def __init__(self, physics_service, sound_service):
         self._physics_service = physics_service
         self._sound_service = sound_service
+        # self._message = Actor()
+
        
         
     def execute(self, cast, script):
@@ -49,4 +52,6 @@ class BulletCollideShipAction(Action):
                 cast.remove_actor(SHIP_GROUP, ship)
                 cast.remove_actor(ALIEN_PROJECTILE_GROUP, bullet)
                 cast.add_actor(EXPLOSION_GROUP, explosion)
+               
+                
                 

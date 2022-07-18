@@ -20,6 +20,7 @@ class DrawActorsAction(Action):
             video_service (VideoService): An instance of VideoService.
         """
         self._video_service = video_service
+        self._lost_all_lives = False
 
     def execute(self, cast, script):
         """Executes the draw actors action.
@@ -37,7 +38,14 @@ class DrawActorsAction(Action):
         self._draw_other_image_actors(cast, EXPLOSION_GROUP)
         self._draw_alien_actors(cast)
         self._draw_hud(cast)
+        if self._lost_all_lives == False:
+            if (cast.get_actors(SHIP_GROUP) == []):
+                stats = cast.get_first_actor(STATS_GROUP)
+                if stats.get_lives():
+                    self._draw_game_over_message(cast)
+                    self._lost_all_lives = True
         
+
         self._video_service.flush_buffer()
 
     def _draw_hud(self, cast):
@@ -50,6 +58,9 @@ class DrawActorsAction(Action):
         self._draw_text_actor(cast, RESTART_MESS_GROUP, RESTART_MESS_FORMAT, message.get_restart_message())
         self._draw_text_actor(cast, EXIT_MESS_GROUP, EXIT_MESS_FORMAT, message.get_exit_game_message())
 
+    def _draw_game_over_message(self, cast):
+        message = cast.get_first_actor(MESSAGE_GROUP)
+        self._draw_text_actor(cast, GAME_OVER_MESS_GROUP, GAME_OVER_MESS_FORMAT, message.get_game_over_message())
 
     def _draw_text_actor(self, cast, group, format_str, data):
         label = cast.get_first_actor(group)

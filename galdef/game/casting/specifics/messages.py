@@ -8,7 +8,7 @@ class Messages(Actor):
     def __init__(self):
         """Constructs a new Stats."""
         super().__init__()
-        self._game_over_message = "GAME  OVER"
+        self._game_over_message = "GAME  OVER!\n  TO  PLAY  AGAIN  PRESS  R\n   OR  PRESS  ESC  TO  EXIT  THE  GAME"
         self._restart_message = "PRESS  R  TO  RESTART"
         self._game_start_message = "PRESS  ENTER  TO  START"
         self._exit_game_message = "PRESS  ESC  TO  EXIT"
@@ -24,3 +24,4 @@ class Messages(Actor):
 
     def get_exit_game_message(self):
         return self._exit_game_message
+    

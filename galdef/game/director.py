@@ -1,6 +1,7 @@
 
 from config import *
 from random import randint
+import time 
 
 from game.casting.basics.cast import Cast
 from game.casting.basics.body import Body
@@ -60,7 +61,7 @@ class Director:
         self._physics_service = PhysicsService()
         self._cast = Cast() 
         self._script = Script()
-        self._play_new_round = True
+        self._play_new_round = False
                
 
     def start_game(self):
@@ -101,6 +102,46 @@ class Director:
             
 
         self._video_service.close_window()
+        self._play_new_round = True
+
+        while self._play_new_round == True:
+            # self.on_next(NEW_GAME)
+            # self._execute_actions(INITIALIZE)
+            self._build_game()
+            self._sound_service.play_sound(GAME_THEME)
+
+            # lives = cast.get_first_actor(LIVES_GROUP)
+            # if lives == 0:
+            #     self._play_new_round = False
+
+
+            while self._video_service.is_window_open():
+                self._execute_actions("input")
+                self._execute_actions("update")
+                self._execute_actions("output")
+                if not self._sound_service.is_sound_playing(GAME_THEME):
+                    self._sound_service.play_sound(GAME_THEME)
+                if (self._cast.get_first_actor(ALIEN_GROUP) == []):
+                    stats = self._cast.get_first_actor(STATS_GROUP)
+                    stats.next_level()
+                    stats.add_life()
+                    self._add_alien_grid()
+                    self._add_background()
+
+                if (self._cast.get_actors(SHIP_GROUP) == []):
+                    stats = self._cast.get_first_actor(STATS_GROUP)
+                    if stats.get_lives():
+                        self._add_ship()
+                        stats.lose_life()
+                    else:
+                        self._play_new_round = False
+                        self._reset_game()
+                        
+
+                if self._keyboard_service.is_key_pressed('r'):
+                        self._reset_game()
+            
+            self._video_service.close_window()
 
     def _execute_actions(self, group):
         """Calls execute for each action in the given group.
@@ -130,7 +171,7 @@ class Director:
         self._add_alien_grid()
         
 
-        # Come up with input, update, and output actions to script
+        # input, update, and output actions to script
         self._script.add_action("input", ControlShipAction(self._keyboard_service))
         self._script.add_action("input", MuteUnmuteAction(self._keyboard_service, self._sound_service))
         self._script.add_action("input", IncreaseDecreaseVolumeAction(self._keyboard_service, self._sound_service))
@@ -219,8 +260,9 @@ class Director:
         self._add_message(RESTART_MESS_GROUP, RESTART_MESS_FORMAT, ALIGN_LEFT, position)
         position = Point(MAX_X + 40, MAX_Y - (HUD_MARGIN))
         self._add_message(EXIT_MESS_GROUP, EXIT_MESS_FORMAT, ALIGN_CENTER, position)
-        
-
+        position = Point(MAX_X/2, MAX_Y/2)
+        self._add_large_message(GAME_OVER_MESS_GROUP, GAME_OVER_MESS_FORMAT, ALIGN_CENTER, position)
+       
     def _add_stat(self, group, format, alignment, position):
         self._cast.clear_actors(group)
         text = Text(format, FONT_FILE, FONT_SMALL, alignment)
@@ -230,6 +272,12 @@ class Director:
     def _add_message(self, group, format, alignment, position):
         self._cast.clear_actors(group)
         text = Text(format, FONT_FILE, 10, alignment)
+        label = Label(text, position)
+        self._cast.add_actor(group, label)
+
+    def _add_large_message(self, group, format, alignment, position):
+        self._cast.clear_actors(group)
+        text = Text(format, FONT_FILE, 30, alignment)
         label = Label(text, position)
         self._cast.add_actor(group, label)
         
