@@ -12,7 +12,7 @@ class MoveAlienAction(Action):
         self._bottom_bound = MAX_Y - SHIP_HEIGHT
         self._collision_velocity = Point()
         
-    def execute(self, cast, script):
+    def execute(self, cast, script, flags):
         alien_grid = cast.get_first_actor(ALIEN_GROUP)
         if alien_grid == []:
             self._movement_phase = 0

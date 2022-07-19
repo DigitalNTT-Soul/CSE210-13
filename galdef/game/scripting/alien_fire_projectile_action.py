@@ -16,14 +16,13 @@ class AlienFireProjectileAction(Action):
         # self._already_shot = False
         
 
-    def execute(self, cast, script):
+    def execute(self, cast, script, flags):
         alien_grid = cast.get_first_actor(ALIEN_GROUP)
         level = cast.get_first_actor(STATS_GROUP).get_level()
-        is_hardcore = cast.get_first_actor(HARDCORE)[0]
         for row in alien_grid:
             for alien in row:
                 num = random.randint(1,1000)
-                if (is_hardcore and num <= level) or num == 1:
+                if (flags.get_flag(HARDCORE) and num <= level) or num == 1:
                     self._sound_service.play_sound(ALIEN_BULLET_SOUND)
 
                     alien_position = alien.get_body().get_position()

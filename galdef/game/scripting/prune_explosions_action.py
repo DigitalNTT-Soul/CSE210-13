@@ -8,7 +8,7 @@ class PruneExplosionsAction(Action):
     def __init__(self):
         pass
 
-    def execute(self, cast, script):        
+    def execute(self, cast, script, flags):        
         explosions = cast.get_actors(EXPLOSION_GROUP)
         for explosion in explosions:
             animation_frame = explosion.get_animation().get_index()

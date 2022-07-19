@@ -18,7 +18,7 @@ class BulletCollideShipAction(Actor):
 
        
         
-    def execute(self, cast, script):
+    def execute(self, cast, script, flags):
         bullets = cast.get_actors(ALIEN_PROJECTILE_GROUP)
         if bullets == []:
             return
