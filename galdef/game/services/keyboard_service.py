@@ -34,6 +34,9 @@ class KeyboardService:
 
         # hardcore mode
         self._keys[HARDCORE] = pyray.KEY_H
+
+        #Pause game
+        self._keys[PAUSE] = pyray.KEY_P
         
 
     def is_key_up(self, key):
