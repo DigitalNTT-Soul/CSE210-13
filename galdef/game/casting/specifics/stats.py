@@ -13,9 +13,11 @@ class Stats(Actor):
         self._score = 0
         self._kills = 0
 
-    def add_life(self):
+    def add_life(self, hardcore = False):
         """Adds one life."""
-        if self._lives < MAXIMUM_LIVES:
+        if not hardcore:
+            self._lives += 1
+        elif self._lives < MAXIMUM_LIVES:
             self._lives += 1 
 
     def add_points(self, points):
