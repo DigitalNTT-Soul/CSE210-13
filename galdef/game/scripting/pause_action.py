@@ -1,6 +1,7 @@
 from config import *
 from game.scripting.action import Action
 
+#Pause function
 class PauseAction(Action):
     def __init__(self, keyboard_service):
         self._keyboard_service = keyboard_service
