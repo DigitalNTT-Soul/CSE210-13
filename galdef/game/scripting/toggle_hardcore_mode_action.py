@@ -5,7 +5,6 @@ class ToggleHardcoreModeAction(Action):
     def __init__(self, keyboard_service):
         self._keyboard_service = keyboard_service
     
-    def execute(self, cast, script):
+    def execute(self, cast, script, flags):
         if self._keyboard_service.is_key_pressed(HARDCORE):
-            hardcore_status = cast.get_first_actor(HARDCORE)
-            hardcore_status[0] = not (hardcore_status[0])
+            flags.toggle_flag(HARDCORE)

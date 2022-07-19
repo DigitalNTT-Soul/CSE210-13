@@ -31,6 +31,7 @@ from game.scripting.alien_fire_projectile_action import AlienFireProjectileActio
 from game.scripting.player_fire_projectile_action import PlayerFireProjectileAction
 from game.scripting.toggle_hardcore_mode_action import ToggleHardcoreModeAction
 from game.scripting.increase_decrease_volume_action import IncreaseDecreaseVolumeAction
+from game.scripting.pause_action import PauseAction
 
 from game.services.video_service import VideoService
 from game.services.sound_service import SoundService
@@ -38,6 +39,7 @@ from game.services.keyboard_service import KeyboardService
 from game.services.physics_service import PhysicsService
 
 from game.shared.point import Point
+from game.shared.flags import Flags
 
 class Director:
     """A person who directs the game. 
@@ -60,6 +62,7 @@ class Director:
         self._physics_service = PhysicsService()
         self._cast = Cast() 
         self._script = Script()
+        self._flags = Flags()
         self._play_new_round = True
                
 
@@ -76,9 +79,11 @@ class Director:
         self._sound_service.play_sound(GAME_THEME)
 
         while self._video_service.is_window_open():
-            self._execute_actions("input")
-            self._execute_actions("update")
-            self._execute_actions("output")
+            self._execute_actions(INPUT)
+            if not self._flags.get_flag(PAUSE):
+                self._execute_actions(UPDATE)
+            self._execute_actions(OUTPUT)
+
             if not self._sound_service.is_sound_playing(GAME_THEME):
                 self._sound_service.play_sound(GAME_THEME)
             if (self._cast.get_first_actor(ALIEN_GROUP) == []):
@@ -97,7 +102,7 @@ class Director:
                     self._reset_game()
 
             if self._keyboard_service.is_key_pressed('r'):
-                        self._reset_game()
+                self._reset_game()
             
 
         self._video_service.close_window()
@@ -112,17 +117,19 @@ class Director:
         """
         actions = self._script.get_actions(group)    
         for action in actions:
-            action.execute(self._cast, self._script)
+            action.execute(self._cast, self._script, self._flags)
 
     def _build_game(self):
         """ Builds the game
         """
+
+        self._flags.set_flag(HARDCORE, False)
+        self._flags.set_flag(PAUSE, False)
         self._video_service.load_images("galdef/assets/images")
         self._video_service.load_images("galdef/assets/images/backgrounds")
         self._video_service.load_fonts("galdef/assets/fonts")
         self._sound_service.initialize()
         self._sound_service.load_sounds("galdef/assets/sounds")
-        self._add_hardcore_flag_actor()
         self._add_background()
         self._add_all_stats()
         self._add_all_messages()
@@ -131,22 +138,25 @@ class Director:
         
 
         # Come up with input, update, and output actions to script
-        self._script.add_action("input", ControlShipAction(self._keyboard_service))
-        self._script.add_action("input", MuteUnmuteAction(self._keyboard_service, self._sound_service))
-        self._script.add_action("input", IncreaseDecreaseVolumeAction(self._keyboard_service, self._sound_service))
-        self._script.add_action("input", PlayerFireProjectileAction(self._keyboard_service, self._sound_service))
-        self._script.add_action("input", ToggleHardcoreModeAction(self._keyboard_service))
-        self._script.add_action("update", AlienFireProjectileAction(self._sound_service))
-        self._script.add_action("update", BulletCollideAlienAction(self._physics_service, self._sound_service))
-        self._script.add_action("update", BulletCollideShipAction(self._physics_service,self._sound_service))
-        self._script.add_action("update", BulletCollideBulletAction(self._physics_service,self._sound_service))
-        self._script.add_action("update", MoveAlienAction())
-        self._script.add_action("update", MoveActorsAction())
-        self._script.add_action("update", PruneExplosionsAction())
-        self._script.add_action("update", PruneMissedShotsAction())
-        self._script.add_action("output", DrawActorsAction(self._video_service))
+        self._script.add_action(INPUT, ControlShipAction(self._keyboard_service))
+        self._script.add_action(INPUT, MuteUnmuteAction(self._keyboard_service, self._sound_service))
+        self._script.add_action(INPUT, IncreaseDecreaseVolumeAction(self._keyboard_service, self._sound_service))
+        self._script.add_action(INPUT, PlayerFireProjectileAction(self._keyboard_service, self._sound_service))
+        self._script.add_action(INPUT, ToggleHardcoreModeAction(self._keyboard_service))
+        self._script.add_action(INPUT, PauseAction(self._keyboard_service))
+        self._script.add_action(UPDATE, AlienFireProjectileAction(self._sound_service))
+        self._script.add_action(UPDATE, BulletCollideAlienAction(self._physics_service, self._sound_service))
+        self._script.add_action(UPDATE, BulletCollideShipAction(self._physics_service,self._sound_service))
+        self._script.add_action(UPDATE, BulletCollideBulletAction(self._physics_service,self._sound_service))
+        self._script.add_action(UPDATE, MoveAlienAction())
+        self._script.add_action(UPDATE, MoveActorsAction())
+        self._script.add_action(UPDATE, PruneExplosionsAction())
+        self._script.add_action(UPDATE, PruneMissedShotsAction())
+        self._script.add_action(OUTPUT, DrawActorsAction(self._video_service))
         
     def _reset_game(self):
+        self._cast.clear_actors(ALIEN_PROJECTILE_GROUP)
+        self._cast.clear_actors(SHIP_PROJECTILE_GROUP)
         self._add_background()
         self._add_all_stats()
         self._add_ship()
@@ -193,8 +203,7 @@ class Director:
         alien_img_num = randint(0, len(ALIEN_IMAGES) - 1)
         animation = Animation(ALIEN_IMAGES[alien_img_num], ALIEN_RATE, ALIEN_DELAY)
         level = self._cast.get_first_actor(STATS_GROUP).get_level()
-        is_hardcore = self._cast.get_first_actor(HARDCORE)[0]
-        alien = Alien(body, animation, level, is_hardcore)
+        alien = Alien(body, animation, level, self._flags)
         alien.march_right()
         # self._cast.add_actor(ALIEN_GROUP, alien)
         return alien
@@ -202,7 +211,7 @@ class Director:
     def _add_all_stats(self):
         self._cast.clear_actors(STATS_GROUP)
         self._cast.clear_actors(MESSAGE_GROUP)
-        self._cast.add_actor(STATS_GROUP, Stats())
+        self._cast.add_actor(STATS_GROUP, Stats(self._flags))
         self._cast.add_actor(MESSAGE_GROUP, Messages())
         
         position = Point(HUD_MARGIN, HUD_MARGIN)
@@ -242,7 +251,3 @@ class Director:
                 alien = self._add_alien(j, i)
                 alien_grid[i].append(alien)
         self._cast.add_actor(ALIEN_GROUP, alien_grid)
-    
-    def _add_hardcore_flag_actor(self):
-        self._cast.clear_actors(HARDCORE)
-        self._cast.add_actor(HARDCORE, [False])

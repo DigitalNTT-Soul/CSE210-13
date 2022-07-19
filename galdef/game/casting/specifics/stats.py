@@ -5,17 +5,18 @@ from game.casting.basics.actor import Actor
 class Stats(Actor):
     """The game stats."""
 
-    def __init__(self):
+    def __init__(self, flags):
         """Constructs a new Stats."""
         super().__init__()
         self._level = 1
         self._lives = DEFAULT_LIVES
         self._score = 0
         self._kills = 0
+        self._flags = flags
 
-    def add_life(self, hardcore = False):
+    def add_life(self):
         """Adds one life."""
-        if not hardcore:
+        if not self._flags.get_flag(HARDCORE):
             self._lives += 1
         elif self._lives < MAXIMUM_LIVES:
             self._lives += 1 

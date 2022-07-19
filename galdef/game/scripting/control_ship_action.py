@@ -7,7 +7,7 @@ class ControlShipAction(Action):
     def __init__(self, keyboard_service):
         self._keyboard_service = keyboard_service
         
-    def execute(self, cast, script):
+    def execute(self, cast, script, flags):
         ship = cast.get_first_actor(SHIP_GROUP)
         if not ship:
             return
@@ -17,6 +17,3 @@ class ControlShipAction(Action):
             ship.swing_right()  
         else: 
             ship.stop_moving()
-
-
-    

@@ -6,7 +6,7 @@ class MoveActorsAction(Action):
     def __init__(self):
         pass
 
-    def execute(self, cast, script):
+    def execute(self, cast, script, flags):
         ship = cast.get_first_actor(SHIP_GROUP)
         if not ship:
             return

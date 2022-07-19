@@ -27,6 +27,9 @@ class KeyboardService:
         # restart game
         self._keys['r'] = pyray.KEY_R
 
+        # pause game
+        self._keys[PAUSE] = pyray.KEY_P
+
         # audio
         self._keys[MUTE] = pyray.KEY_M
         self._keys[PLUS] = pyray.KEY_EQUAL # This is the actual button where the Plus Sign is on the keyboard

@@ -7,6 +7,6 @@ class MuteUnmuteAction(Action):
         self._keyboard_service = keyboard_service
         self._sound_service = sound_service
 
-    def execute(self, cast, script):
+    def execute(self, cast, script, flags):
         if self._keyboard_service.is_key_pressed(MUTE):
             self._sound_service.toggle_mute()

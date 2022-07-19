@@ -6,7 +6,7 @@ class IncreaseDecreaseVolumeAction(Action):
         self._keyboard_service = keyboard_service
         self._sound_service = sound_service
 
-    def execute(self, cast, script):
+    def execute(self, cast, script, flags):
         if self._keyboard_service.is_key_pressed(PLUS):
             self._sound_service.increase_volume()
         elif self._keyboard_service.is_key_pressed(MINUS):

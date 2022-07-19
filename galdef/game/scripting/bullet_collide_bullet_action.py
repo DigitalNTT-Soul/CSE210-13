@@ -15,7 +15,7 @@ class BulletCollideBulletAction(Action):
         self._sound_service = sound_service
        
         
-    def execute(self, cast, script):
+    def execute(self, cast, script, flags):
         alien_bullets = cast.get_actors(ALIEN_PROJECTILE_GROUP)
         ship_bullets = cast.get_actors(SHIP_PROJECTILE_GROUP)
         

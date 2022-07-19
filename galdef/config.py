@@ -138,4 +138,8 @@ RESET = "r"
 HARDCORE = "h"
 PLUS = "+"
 MINUS = "-"
-PAUSE = "p"
+
+# GAME PHASES
+INPUT = "input"
+UPDATE = "update"
+OUTPUT = "output"

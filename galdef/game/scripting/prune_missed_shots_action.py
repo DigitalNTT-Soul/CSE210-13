@@ -5,7 +5,7 @@ class PruneMissedShotsAction(Action):
     def __init__(self):
         pass
 
-    def execute(self, cast, script):
+    def execute(self, cast, script, flags):
         self._prune(cast, ALIEN_PROJECTILE_GROUP)
         self._prune(cast, SHIP_PROJECTILE_GROUP)
 

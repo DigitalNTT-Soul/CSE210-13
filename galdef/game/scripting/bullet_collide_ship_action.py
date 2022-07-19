@@ -15,7 +15,7 @@ class BulletCollideShipAction(Action):
         self._sound_service = sound_service
        
         
-    def execute(self, cast, script):
+    def execute(self, cast, script, flags):
         bullets = cast.get_actors(ALIEN_PROJECTILE_GROUP)
         if bullets == []:
             return
