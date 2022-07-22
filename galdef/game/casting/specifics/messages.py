@@ -2,7 +2,6 @@ from config import *
 from game.casting.basics.actor import Actor
 import os
 
-
 class Messages(Actor):
     """The game stats."""
 
@@ -22,7 +21,6 @@ class Messages(Actor):
         """ 
         Compares players score with the current high score. If the players high score in bigger stores the players score as the new high score in the High_Score.txt file. Updates class variables with the first name, last name, and hight score from the High_Score.txt file
 
-        
         Args:
             self (High_score): An instance of High_score.
         """
@@ -32,7 +30,6 @@ class Messages(Actor):
             high_score_info = high_score_info.split() # make a new list with each part of the string placed in a seperate index
             self._high_score = high_score_info[0] # get the hight score from list and update class high score variable
             self._compare_score = compare_score
-            
             # file closes at this point
 
         if int(self._high_score) < int(compare_score): # compare current high score with player high score
@@ -47,8 +44,7 @@ class Messages(Actor):
                 # file.truncate(0)  # delete the info in the file
                 file.write(f"{string_high_score} {string_level}") # write new high score to file
                 # file closes at this point
-
-                
+         
         with open(HIGH_SCORE_FILE, "r") as file: # Open file
             high_score_info = file.readlines() # get the info from first line as a string and placed in the first index of a string.
             high_score_info = str(high_score_info[0]) # take the info in the first index of the list and make it a string
@@ -74,7 +70,6 @@ class Messages(Actor):
             # file closes at this point
             return high_score_info
 
-
     def get_game_over_message(self):
         return self._game_over_message
         
@@ -86,4 +81,3 @@ class Messages(Actor):
 
     def get_exit_game_message(self):
         return self._exit_game_message
-    
