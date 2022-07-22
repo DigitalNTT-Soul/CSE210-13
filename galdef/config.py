@@ -24,6 +24,9 @@ FONT_FILE = "galdef/assets/fonts/FastHand.ttf" # "galdef/assets/fonts/zorque.otf
 FONT_SMALL = 32
 FONT_LARGE = 48
 
+# HIGH SCORE
+HIGH_SCORE_FILE = "galdef/assets/save_game/high_score.txt"
+
 # TEXT
 ALIGN_CENTER = 0
 ALIGN_LEFT = 1
@@ -40,8 +43,8 @@ MESSAGE_GROUP = "messages"
 
 GAME_OVER_MESS_GROUP = "game_over"
 GAME_START_MESS_GROUP = "start_game"
-GAME_OVER_MESS_FORMAT = "GAME_OVER: {}"
-GAME_START_MESS_FORMAT = "START_GAME: {}"
+GAME_OVER_MESS_FORMAT = "{}"
+GAME_START_MESS_FORMAT = "{}"
 
 # HUD
 HUD_MARGIN = 15
@@ -87,7 +90,8 @@ BACKGROUND_IMAGES = [
     "galdef/assets/images/backgrounds/arawn_dystopia.png",
     "galdef/assets/images/backgrounds/nebula_background.png",
     "galdef/assets/images/backgrounds/snippet_of_creation_background.png",
-    "galdef/assets/images/backgrounds/pillars_of_creation_background.png",
+    "galdef/assets/images/backgrounds/dark_city_background.png",
+    
 ]
 
 # SHIP
@@ -101,11 +105,13 @@ SHIP_VELOCITY = 7
 # ALIEN
 ALIEN_GROUP = "aliens".lower()
 ALIEN_IMAGES = [
-    [f"galdef/assets/images/{i:03}.png" for i in range(10,19)],
-    [f"galdef/assets/images/{i:03}.png" for i in range(20,29)],
-    [f"galdef/assets/images/{i:03}.png" for i in range(30,39)],
-    [f"galdef/assets/images/{i:03}.png" for i in range(40,49)]
+    [f"galdef/assets/images/{i:03}.png" for i in range(10,11)],
+    [f"galdef/assets/images/{i:03}.png" for i in range(20,21)],
+    [f"galdef/assets/images/{i:03}.png" for i in range(30,31)],
+    [f"galdef/assets/images/{i:03}.png" for i in range(40,41)],
+    [f"galdef/assets/images/{i:03}.png" for i in range(50,51)]
 ]
+    
 ALIEN_WIDTH = 50
 ALIEN_HEIGHT = 40
 ALIEN_DELAY = 0.5
@@ -120,12 +126,6 @@ EXPLOSION_IMAGES = {
 EXPLOSION_WIDTH = 80
 EXPLOSION_HEIGHT = 80
 EXPLOSION_VELOCITY = 0
-
-# DIALOG
-DIALOG_GROUP = "dialogs"
-ENTER_TO_START = "PRESS ENTER TO START"
-PREP_TO_LAUNCH = "PREPARING TO LAUNCH"
-WAS_GOOD_GAME = "GAME OVER"
 
 # KEYS
 LEFT = "left"

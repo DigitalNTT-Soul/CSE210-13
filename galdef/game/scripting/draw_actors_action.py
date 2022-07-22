@@ -1,6 +1,7 @@
 from config import *
 from game.casting.basics.animation import Animation
 from game.casting.basics.image import Image
+from game.casting.specifics.messages import Messages
 from game.scripting.action import Action
 
 class DrawActorsAction(Action):
@@ -20,8 +21,14 @@ class DrawActorsAction(Action):
             video_service (VideoService): An instance of VideoService.
         """
         self._video_service = video_service
-        self._lost_all_lives = False
-
+        self._is_paused = False
+        self._current_score = 0
+        self._current_level = 0
+        self._high_score = 0
+        self._high_level = 0
+        self._messages = ""
+        self._game_over_message = (f"GAME  OVER!\nTO  PLAY  AGAIN  PRESS  R\nOR  PRESS  ESC  TO  EXIT  THE  GAME\n \nTHE  HIGH  SCORE  TO  BEAT  IS:    {int(self._high_score)}\n THE  HIGH  LEVEL  TO  BEAT  IS:    {int(self._high_level)}")
+   
     def execute(self, cast, script, flags):
         """Executes the draw actors action.
 
@@ -38,13 +45,22 @@ class DrawActorsAction(Action):
         self._draw_other_image_actors(cast, EXPLOSION_GROUP)
         self._draw_alien_actors(cast)
         self._draw_hud(cast)
-        if self._lost_all_lives == False:
-            if (cast.get_actors(SHIP_GROUP) == []):
+    
+        if (cast.get_actors(SHIP_GROUP) == []):
+            stats = cast.get_first_actor(STATS_GROUP)
+
+            self._messages = Messages()
+            if stats.get_lives():
+                pass
+               
+            else:
                 stats = cast.get_first_actor(STATS_GROUP)
-                if stats.get_lives():
-                    self._draw_game_over_message(cast)
-                    self._lost_all_lives = True
-        
+                self._current_score = stats._score
+                self._current_level = stats._level
+                self._messages.compare_and_store(self._current_score, self._current_level)
+                self._draw_game_over_message(cast)
+                self._is_paused = True
+                flags.toggle_flag(PAUSE)
 
         self._video_service.flush_buffer()
 
@@ -58,9 +74,13 @@ class DrawActorsAction(Action):
         self._draw_text_actor(cast, RESTART_MESS_GROUP, RESTART_MESS_FORMAT, message.get_restart_message())
         self._draw_text_actor(cast, EXIT_MESS_GROUP, EXIT_MESS_FORMAT, message.get_exit_game_message())
 
-    def _draw_game_over_message(self, cast):
-        message = cast.get_first_actor(MESSAGE_GROUP)
-        self._draw_text_actor(cast, GAME_OVER_MESS_GROUP, GAME_OVER_MESS_FORMAT, message.get_game_over_message())
+    def _draw_game_over_message(self, cast):                   
+        high_score_info = self._messages.retrieve_high_score() 
+        self._high_score = int(high_score_info[0])
+        self._high_level = int(high_score_info[1])
+        game_over_message = (f"GAME  OVER!\nTO  PLAY  AGAIN  PRESS  R\nOR  PRESS  ESC  TO  EXIT  THE  GAME\n \nTHE  HIGH  SCORE  TO  BEAT  IS:    {int(high_score_info[0])}\nTHE  HIGH  LEVEL  TO  BEAT  IS:    {self._high_level}")
+
+        self._draw_text_actor(cast, GAME_OVER_MESS_GROUP, GAME_OVER_MESS_FORMAT, game_over_message)
 
     def _draw_text_actor(self, cast, group, format_str, data):
         label = cast.get_first_actor(group)
@@ -93,3 +113,13 @@ class DrawActorsAction(Action):
         if DEBUG:
             rectangle = actor.get_body().get_rectangle()
             self._video_service.draw_rectangle(rectangle, PURPLE)
+
+       
+    def set_is_paused_true(self):
+        self._is_paused = True
+
+    def set_is_paused_false(self):
+        self._is_paused = False
+
+    def get_is_paused(self):
+        return self._is_paused

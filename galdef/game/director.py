@@ -1,7 +1,7 @@
 
 from config import *
 from random import randint
-import time 
+import time
 
 from game.casting.basics.cast import Cast
 from game.casting.basics.body import Body
@@ -65,6 +65,7 @@ class Director:
         self._script = Script()
         self._flags = Flags()
         self._play_new_round = True
+        # self._current_score = 0
                
 
     def start_game(self):
@@ -100,7 +101,10 @@ class Director:
                     self._add_ship()
                     stats.lose_life()
                 else:
-                    self._reset_game()
+                    pass
+                    # self._draw_game_over_message(self.cast)
+                    # self._flags.toggle_flag(PAUSE)
+                    # self._reset_game()
 
             if self._keyboard_service.is_key_pressed('r'):
                 self._reset_game()
@@ -171,6 +175,8 @@ class Director:
         self._video_service.load_fonts("galdef/assets/fonts")
         self._sound_service.initialize()
         self._sound_service.load_sounds("galdef/assets/sounds")
+        # self._get_high_score()
+        # print(self._current_score)
         self._add_background()
         self._add_all_stats()
         self._add_all_messages()
@@ -195,7 +201,11 @@ class Director:
         self._script.add_action(UPDATE, PruneMissedShotsAction())
         self._script.add_action(OUTPUT, DrawActorsAction(self._video_service))
         
+        
     def _reset_game(self):
+        # if self._script.get_is_paused() == True:
+        self._flags.toggle_flag(PAUSE)
+            # self._script.set_is_paused_false()
         self._cast.clear_actors(ALIEN_PROJECTILE_GROUP)
         self._cast.clear_actors(SHIP_PROJECTILE_GROUP)
         self._add_background()
@@ -240,13 +250,11 @@ class Director:
         size = Point(ALIEN_WIDTH, ALIEN_HEIGHT)
         velocity = Point()
         body = Body(position, size, velocity)
-        # image = Image(ALIEN_IMAGES["b"])
         alien_img_num = randint(0, len(ALIEN_IMAGES) - 1)
         animation = Animation(ALIEN_IMAGES[alien_img_num], ALIEN_RATE, ALIEN_DELAY)
         level = self._cast.get_first_actor(STATS_GROUP).get_level()
         alien = Alien(body, animation, level, self._flags)
         alien.march_right()
-        # self._cast.add_actor(ALIEN_GROUP, alien)
         return alien
         
     def _add_all_stats(self):
@@ -269,7 +277,7 @@ class Director:
         self._add_message(RESTART_MESS_GROUP, RESTART_MESS_FORMAT, ALIGN_LEFT, position)
         position = Point(MAX_X + 40, MAX_Y - (HUD_MARGIN))
         self._add_message(EXIT_MESS_GROUP, EXIT_MESS_FORMAT, ALIGN_CENTER, position)
-        position = Point(MAX_X/2, MAX_Y/2)
+        position = Point(MAX_X/2, MAX_Y/3)
         self._add_large_message(GAME_OVER_MESS_GROUP, GAME_OVER_MESS_FORMAT, ALIGN_CENTER, position)
        
     def _add_stat(self, group, format, alignment, position):
@@ -299,3 +307,8 @@ class Director:
                 alien = self._add_alien(j, i)
                 alien_grid[i].append(alien)
         self._cast.add_actor(ALIEN_GROUP, alien_grid)
+
+    def _get_high_score(self):
+        messages = Messages(self._current_score) # makes an instance of messages class 
+        messages.retrieve_high_score() # runs the retrieve_high_score method
+        self._current_score = messages._high_score # updating director high_score variable with the highscore from messages class

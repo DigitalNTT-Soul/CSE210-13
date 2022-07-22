@@ -16,7 +16,7 @@ class Explosion(Actor):
         self._animation = animation
         
     def get_animation(self):
-        """Gets the brick's image.
+        """Gets the explosions's image.
         
         Returns:
             An instance of Image.
